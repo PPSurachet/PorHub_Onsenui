@@ -14,15 +14,27 @@ firebase.analytics();
 
 var db = firebase.firestore();
 
-// firebase.auth().onAuthStateChanged(function (user) {
-//     if (user) {
-//         var email = user.email;
-//     } else {
-//         window.location.href = "login.html"
-//     }
-// });
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        var email = user.email;
+    } else {
+        window.location.href = "login.html"
+    }
+});
 
 $(function () {
 
+    document.addEventListener('init', function (event) {
+        var page = event.target;
+        if (page.id === "Favorite") {
+            $("#Logout").click(function () {
+                firebase.auth().signOut().then(function () {
+                    window.location.href = "login.html"
+                }).catch(function (error) {
+                    // An error happened.
+                });
+            })
+        }
+    });
 
 });
