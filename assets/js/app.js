@@ -18,11 +18,11 @@ var db = firebase.firestore();
 $(function () {
 
     checkUserLogin();
-    Logout();
 
     document.addEventListener('init', function (event) {
         var page = event.target;
-        if (page.id === "Favorite") {
+        if (page.id === "Option") {
+            Logout();
         }
     });
 
@@ -46,6 +46,7 @@ function checkUserLogin() {
             // console.log("photoURL => " + photoURL);
             // console.log("isAnonymous => " + isAnonymous);
             // console.log("uid => " + uid);
+            // console.log("proviederData => " + providerData);
             getprofileUser(user);
         } else {
             window.location.href = "login.html"

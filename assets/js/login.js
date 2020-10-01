@@ -13,12 +13,7 @@ $(function () {
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
 
-
-    // firebase.auth().onAuthStateChanged(function (user) {
-    //     if (user) {
-    //         window.location.href = "index.html"
-    //     }
-    // });
+    var db = firebase.firestore();
 
     $("#signIn").click(function () {
         const email = $("#email").val();
@@ -29,10 +24,18 @@ $(function () {
             var errorMessage = error.message;
             ons.notification.alert(errorMessage);
         });
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                window.location.href = "index.html"
+            }
+        });
+
     })
+
 
     $("#showPassword").click(function () {
         var x = document.getElementById('password');
+
         if (x.type === "password") {
             x.type = "text";
             $("#showPassword").text("Hide")

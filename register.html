@@ -32,6 +32,7 @@
         </ons-toolbar>
         <div class="margin-start">
             <div class="title-SignIn Anton">
+                <ons-icon icon="md-chevron-left" id="btn-back" size="60px"></ons-icon>
                 Sign Up
             </div>
         </div>
@@ -49,8 +50,18 @@
                 <div class="input-group-append">
                     <input type="password" class="form-control form-control-lg" id="confirm"
                         placeholder="Confirm Password">
-                    <button class="input-group-text" id="showPassword">Show</button>
+                    <button class="input-group-text" id="showPasswordSignUp">Show</button>
                 </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group-append">
+                    <input type="text" class="form-control form-control-lg" id="name" placeholder="Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <ons-carousel swipeable auto-scroll overscrollable>
+                    <div id="carouselprofile"></div>
+                </ons-carousel>
             </div>
             <button type="submit" id="signUp" class="Anton btn-signIn btn-lg btn-block">Sign Up</button>
         </div>

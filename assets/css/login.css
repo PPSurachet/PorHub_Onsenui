@@ -30,6 +30,11 @@ ons-page ons-row div{
     text-decoration: underline;
     font-size: 20px;
 }
+
+ons-carousel div {
+    width: 150px;
+}
+
 .login-btn {
     margin-top: 1.5rem;
     margin-left: auto;
@@ -64,4 +69,12 @@ ons-page ons-row div{
     font-size: 18px;
     letter-spacing: 0.2px;
     font-family: "Roboto";
+}
+
+.solid {
+    border-radius: 10px;
+    border: 2px solid white;
+}
+.focused{
+    border: 6px solid #2F2F2F;
 }
