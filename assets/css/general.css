@@ -37,3 +37,8 @@ ons-toolbar .center img{
 .margin-start{
     margin-top: 3.5rem;
 }
+
+.page__background-darkmode{
+    background-color: #2F2F2F;
+    color: white;
+}

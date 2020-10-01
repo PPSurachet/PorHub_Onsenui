@@ -14,12 +14,11 @@ $(function () {
     firebase.analytics();
 
 
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-            var email = user.email;
-            window.location.href = "index.html"
-        }
-    });
+    // firebase.auth().onAuthStateChanged(function (user) {
+    //     if (user) {
+    //         window.location.href = "index.html"
+    //     }
+    // });
 
     $("#signIn").click(function () {
         const email = $("#email").val();

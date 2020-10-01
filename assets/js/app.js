@@ -14,27 +14,60 @@ firebase.analytics();
 
 var db = firebase.firestore();
 
-firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        var email = user.email;
-    } else {
-        window.location.href = "login.html"
-    }
-});
 
 $(function () {
+
+    checkUserLogin();
+    Logout();
 
     document.addEventListener('init', function (event) {
         var page = event.target;
         if (page.id === "Favorite") {
-            $("#Logout").click(function () {
-                firebase.auth().signOut().then(function () {
-                    window.location.href = "login.html"
-                }).catch(function (error) {
-                    // An error happened.
-                });
-            })
         }
     });
 
 });
+
+function checkUserLogin() {
+
+    firebase.auth().onAuthStateChanged(function (user) {
+
+        if (user) {
+            // var displayName = user.displayName;
+            // var email = user.email;
+            // var emailVerified = user.emailVerified;
+            // var photoURL = user.photoURL;
+            // var isAnonymous = user.isAnonymous;
+            // var uid = user.uid;
+            // var providerData = user.providerData;
+            // console.log("displayname => " + displayName);
+            // console.log("email => " + email);
+            // console.log("emailVerified => " + emailVerified);
+            // console.log("photoURL => " + photoURL);
+            // console.log("isAnonymous => " + isAnonymous);
+            // console.log("uid => " + uid);
+            getprofileUser(user);
+        } else {
+            window.location.href = "login.html"
+        }
+
+    });
+}
+
+function Logout() {
+    $("#Logout").click(function () {
+        firebase.auth().signOut().then(function () {
+            window.location.href = "login.html"
+        }).catch(function (error) {
+            // An error happened.
+        });
+    })
+}
+
+function getprofileUser(data) {
+    const profile =
+        /*html*/
+        `<img src="${data.photoURL}" class="imgprofile" alt="" srcset="">
+                <div class="profileName">${data.displayName}</div>`;
+    $("#Profile").append(profile)
+}
