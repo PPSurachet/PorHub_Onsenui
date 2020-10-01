@@ -21,6 +21,8 @@ $(function () {
         }
     });
 
+    var imgtarget;
+
     db.collection("profilepic").get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
             const profileCarousel =
@@ -29,22 +31,23 @@ $(function () {
                 </ons-carousel-item>`;
             $("#carouselprofile").append(profileCarousel);
         });
+        $("img").click(function () {
+            $('img').removeClass('focused');
+            $(this).addClass('focused');
+            const profileTarget = $(this).attr('id')
+            db.collection("profilepic").get().then(function (querySnapshot) {
+                querySnapshot.forEach(function (doc) {
+                    if (profileTarget == doc.data().id) {
+                        imgtarget = doc.data().profileURL;
+                    }
+                });
+            });
+        })
     });
 
-    var imgtarget;
+    
 
-    $("img").click(function () {
-        $('img').removeClass('focused');
-        $(this).addClass('focused');
-        const profileTarget = $(this).attr('id')
-        db.collection("profilepic").get().then(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
-                if (profileTarget == doc.data().id) {
-                    imgtarget = doc.data().profileURL;
-                }
-            });
-        });
-    })
+    
 
 
     $("#signUp").click(function () {
