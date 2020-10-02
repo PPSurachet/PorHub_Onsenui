@@ -13,7 +13,7 @@ $(function () {
                 $('#changePass .page__background').css("background-color", "#2F2F2F");
                 $('.titleOP').css("color", "white");
                 $('svg').css("fill", "white");
-                $('.btn-ligtmode').css("background-color", "#FA043F");
+                $('.btn-lightmode').css("background-color", "#FA043F");
             }
         }
 

@@ -2,7 +2,10 @@
     font-family: 'Anton', sans-serif
 }
 .Cairo{
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Cairo', sans-serif
+}
+.Prompt{
+    font-family: 'Prompt', sans-serif;
 }
 .toolbar{
     height: 90px;

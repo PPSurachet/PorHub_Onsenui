@@ -30,9 +30,15 @@ $(function () {
             document.querySelector("#ChangePassword").onclick = function () {
                 document.querySelector('#Navigator_option').pushPage("views/ChangePassword.html")
             }
+            document.querySelector("#editProfile").onclick = function () {
+                document.querySelector('#Navigator_option').pushPage("views/editProfile.html")
+            }
         } else if (page.id === "changePass") {
             showPassword();
             ChangePassword();
+        } else if (page.id === "editProfile") {
+            var user = firebase.auth().currentUser;
+            editProfile(user)
         }
     });
 
@@ -84,8 +90,8 @@ function getprofileUser(data) {
 }
 
 function getmovieFavourite() {
-    // db.collection("movies").get().then(function(querySnapshot) {
-    //     querySnapshot.forEach(function(doc) {     
+    // db.collection("movies").get().then(function (querySnapshot) {
+    //     querySnapshot.forEach(function (doc) {
     //         const result = ` 
     //         <div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
     //             <div class="movietextbg">
@@ -93,7 +99,6 @@ function getmovieFavourite() {
     //             </div>
     //         </div>`
     //         $("#showmovieFavorite").append(result)
-    //         console.log(doc.data().posterURL);
     //     });
     // });
 }
@@ -136,4 +141,31 @@ function ChangePassword() {
         }
 
     })
+}
+
+function editProfile(data) {
+    const getprofile =
+        /*html*/
+        `<div class="text-center">
+            <img src="${data.photoURL}" class="editImg" alt="" srcset="">
+        </div>
+        <ons-list>
+            <ons-list-item class="row align-items-center">
+                <div class="left font-weight-bold">
+                    ID
+                </div>
+                <div class="center col-8">
+                    <input type="text" class="form-control" id="username" value="${data.displayName}">
+                </div>
+                <div class="right" id="saveEditProfile">
+                    <ons-icon size="40px" icon="md-edit"></ons-icon>
+                </div>
+            </ons-list-item>
+        </ons-list>`
+    $("#showEditProfile").append(getprofile);
+
+    $("#saveEditProfile").click(function () {
+        console.log("ENEE");
+    })
+
 }

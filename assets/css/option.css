@@ -21,7 +21,7 @@ ons-list-item{
     padding-left: 2rem;
     padding-right: 1rem;
     color: black;
-    background-color: #ffffff;
+    background-color: #efeff4;
 }
 
 .list-item-darkmode {
@@ -77,7 +77,7 @@ ons-list-item{
     font-size: 24px;
 }
 
-.btn-ligtmode{
+.btn-lightmode{
     border: 0px;
     background-color: #1E73F1;
     border-radius: 10px;
@@ -108,5 +108,33 @@ ons-list-item{
 .titleOP{
     font-weight: bold;
     font-size: 30px;
-    margin-left: 1rem;
+}
+
+.editImg{
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    width: 160px;
+    border-radius: 180px;
+    border: 7px solid #C4C4C4;
+}
+
+.textInput{
+    font-size: 20px;
+}
+
+.btn-editProfile{
+    margin-top: 1.5rem;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 0px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    background-color: #1E73F1;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 2px;
 }
