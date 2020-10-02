@@ -1,0 +1,29 @@
+.imgfav{
+  height: 360px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  margin-top: 1rem;
+  border-radius: 10px;
+  border: 1px solid;
+  box-shadow: 5px 5px 12px #616161;
+
+}
+.movietitle{
+    font-weight: bold;
+    font-size: 25px;
+    color: rgb(0, 0, 0);
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+}
+.movietextbg{
+    width: 100%;
+    background-color: #fff;
+    opacity: 0.75;
+    text-align: center;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    border-radius: 10px;
+}
+

@@ -9,7 +9,7 @@
 }
 ons-toolbar .center{
     padding: 1.5rem;
-    background-color: #9C0A0A;
+    background-color: #BA0F0F;
     color: white;
     font-weight: bold;
     font-size: 50px;
@@ -41,6 +41,10 @@ ons-toolbar .center img{
     background-color: #2F2F2F;
     color: white;
 }
+.page__background{
+    background-color: #ffffff;
+    color: white;
+}
 
 .tabbar__icon {
     font-size: 30px;
@@ -56,3 +60,10 @@ ons-toolbar .center img{
 :checked+.tabbar__button{
     color: #000000;
 }
+
+.titlebar{
+    font-weight: bold;
+    font-size: 30px;
+    margin-left: 1rem;
+}
+
