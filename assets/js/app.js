@@ -24,6 +24,10 @@ $(function () {
         if (page.id === "Option") {
             Logout();
         }
+        else if (page.id === "Favorite" ){
+            getmovieFavourite();
+        
+        }
     });
 
 });
@@ -71,4 +75,19 @@ function getprofileUser(data) {
         `<img src="${data.photoURL}" class="imgprofile" alt="" srcset="">
                 <div class="profileName">${data.displayName}</div>`;
     $("#Profile").append(profile)
+}
+
+function getmovieFavourite() {
+    // db.collection("movies").get().then(function(querySnapshot) {
+    //     querySnapshot.forEach(function(doc) {     
+    //         const result = ` 
+    //         <div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
+    //             <div class="movietextbg">
+    //                 <div class="movietitle">${doc.data().title}</div>
+    //             </div>
+    //         </div>`
+    //         $("#showmovieFavorite").append(result)
+    //         console.log(doc.data().posterURL);
+    //     });
+    // });
 }

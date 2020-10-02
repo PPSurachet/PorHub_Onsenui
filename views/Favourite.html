@@ -1,12 +1,19 @@
 <ons-page id="FavoritePage">
     <ons-navigator swipeable id="Navigator_favorite" page="Favorite.html"></ons-navigator>
     <template id="Favorite.html">
-        <ons-page id="Favorite" class="margin-start">
-            <ons-list class="Cairo">
+        <ons-page id="Favorite" class="margin-start Cairo">
+            <ons-list>
                 <ons-list-item class="area-margin">
                     <ons-icon size="45px" icon="md-favorite"></ons-icon>
+                    <div class="titlebar">Favourite</div>
                 </ons-list-item>
+
             </ons-list>
+            <div class="imgfav d-flex align-items-end">
+                <div class="movietextbg">
+                    <div class="movietitle">John Wick Chapter:2</div>
+                </div>
+            </div>
         </ons-page>
     </template>
 </ons-page>
