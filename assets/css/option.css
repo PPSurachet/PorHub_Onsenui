@@ -52,6 +52,20 @@ ons-list-item{
     background-color: #FA043F;
 }
 
+.switch__handle {
+    background-color: #ffffff;
+    transition-property: all;
+    transition-duration: .35s;
+    position: absolute;
+}
+
+/* .switch__toggle{
+    background-color: #573a3a88;
+    transition-property: all;
+    transition-duration: .35s;
+    position: absolute;
+} */
+
 .imgprofile{
     border-radius: 50px;
     width: 55px;
@@ -63,8 +77,36 @@ ons-list-item{
     font-size: 24px;
 }
 
-.area-margin{
-    display: flex;
-    align-items: center;
-    margin-right: 2rem;
+.btn-ligtmode{
+    border: 0px;
+    background-color: #1E73F1;
+    border-radius: 10px;
+    color: white;
+    font-size: 30px;
+    letter-spacing: 2px;
+}
+
+.btn-darkmode{
+    border: 0px;
+    background-color: #FA043F;
+    border-radius: 10px;
+    color: white;
+    font-size: 30px;
+    letter-spacing: 2px;
+}
+
+.margin-input{
+    margin-top: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.form-group{
+    margin-bottom: 1.5rem;
+}
+
+.titleOP{
+    font-weight: bold;
+    font-size: 30px;
+    margin-left: 1rem;
 }

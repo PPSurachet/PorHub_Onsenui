@@ -21,12 +21,18 @@ $(function () {
 
     document.addEventListener('init', function (event) {
         var page = event.target;
-        if (page.id === "Option") {
-            Logout();
-        }
-        else if (page.id === "Favorite" ){
+
+        if (page.id === "Favorite") {
             getmovieFavourite();
-        
+
+        } else if (page.id === "Option") {
+            Logout();
+            document.querySelector("#ChangePassword").onclick = function () {
+                document.querySelector('#Navigator_option').pushPage("views/ChangePassword.html")
+            }
+        } else if (page.id === "changePass") {
+            showPassword();
+            ChangePassword();
         }
     });
 
@@ -90,4 +96,44 @@ function getmovieFavourite() {
     //         console.log(doc.data().posterURL);
     //     });
     // });
+}
+
+function showPassword() {
+    $("#showPassword").click(function () {
+        var x = document.getElementById('oldpassword');
+        var z = document.getElementById('newpassword');
+        var y = document.getElementById('confirmpassword');
+        if (x.type === "password") {
+            z.type = "text"
+            x.type = "text";
+            y.type = "text";
+            $("#showPassword").text("Hide")
+        } else {
+            x.type = "password";
+            y.type = "password";
+            z.type = "password"
+            $("#showPassword").text("Show")
+        }
+    })
+}
+
+function ChangePassword() {
+    $("#confirmPassword").click(function () {
+        const newPass = document.getElementById('newpassword').value
+        const conPass = document.getElementById('confirmpassword').value
+
+        if (newPass == conPass) {
+            var user = firebase.auth().currentUser;
+            user.updatePassword(conPass).then(function () {
+                if (ons.notification.alert("Change password is complete")) {
+                    document.querySelector('#Navigator_option').popPage();
+                }
+            }).catch(function (error) {
+                // An error happened.
+            });
+        } else {
+            ons.notification.alert("Password isn't correct");
+        }
+
+    })
 }
