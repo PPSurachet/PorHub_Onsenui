@@ -90,17 +90,17 @@ function getprofileUser(data) {
 }
 
 function getmovieFavourite() {
-    // db.collection("movies").get().then(function (querySnapshot) {
-    //     querySnapshot.forEach(function (doc) {
-    //         const result = ` 
-    //         <div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
-    //             <div class="movietextbg">
-    //                 <div class="movietitle">${doc.data().title}</div>
-    //             </div>
-    //         </div>`
-    //         $("#showmovieFavorite").append(result)
-    //     });
-    // });
+    db.collection("movies").get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+            const result = ` 
+            <div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
+                <div class="movietextbg">
+                    <div class="movietitle">${doc.data().title}</div>
+                </div>
+            </div>`
+            $("#showmovieFavorite").append(result)
+        });
+    });
 }
 
 function showPassword() {

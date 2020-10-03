@@ -1,8 +1,15 @@
 <ons-page id="SearchPage">
     <ons-navigator swipeable id="Navigator_search" page="Search.html"></ons-navigator>
     <template id="Search.html">
-        <ons-page id="Search">
-            Search Page
+        <ons-page id="Search" class="margin-start Cairo">
+            <ons-row class="d-flex align-items-center searchbar">
+                <div class="font-weight-bold">
+                    <ons-icon size="45px" icon="md-search"></ons-icon>
+                </div>
+                <div class="col-10">
+                    <input type="text" class="form-control" placeholder="Search" value="">
+                </div>
+            </ons-row>
         </ons-page>
     </template>
 </ons-page>

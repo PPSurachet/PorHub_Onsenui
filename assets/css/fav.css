@@ -10,6 +10,20 @@
   box-shadow: 5px 5px 12px #616161;
 
 }
+.imgfav2{
+  height: 360px;
+  width: 10.5rem;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: 1.2rem;
+  margin-right: 1rem;
+  margin-top: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid;
+  box-shadow: 5px 5px 12px #616161;
+
+}
+
 .movietitle{
     font-weight: bold;
     font-size: 25px;
