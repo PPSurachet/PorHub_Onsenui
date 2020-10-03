@@ -22,8 +22,7 @@ $(function () {
     document.addEventListener('init', function (event) {
         var page = event.target;
         if (page.id === "Home") {
-
-
+            addmovieFavorite();
         } else if (page.id === "Favorite") {
             getmovieFavourite();
         } else if (page.id === "Option") {
@@ -72,14 +71,54 @@ function checkUserLogin() {
     });
 }
 
-function Logout() {
-    $("#Logout").click(function () {
-        firebase.auth().signOut().then(function () {
-            window.location.href = "login.html"
-        }).catch(function (error) {
-            // An error happened.
+function getmoviefromSearch() {
+    const searchText = document.getElementById('searchResult').value
+    $("#searchItem").empty();
+    db.collection("movies").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            const titlemovie = doc.data().title;
+            if (titlemovie.indexOf(searchText) != -1) {
+                const Result =
+                    /*html*/
+                    `<div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
+                        <div class="movietextbg">
+                            <div class="movietitle">${doc.data().title}</div>
+                        </div>
+                    </div>`
+                $("#searchItem").append(Result);
+            }
         });
-    })
+    });
+}
+
+function addmovieFavorite() {
+    // $("#addFavorite").click(function () {
+    //     var user = firebase.auth().currentUser;
+    //     db.collection("movies").doc("God").update({
+    //         uid: firebase.firestore.FieldValue.arrayUnion(user.uid)
+    //     }).then(function () {
+    //         console.log("Document successfully updated!");
+    //     });
+    // })
+}
+
+function getmovieFavourite() {
+    // db.collection("movies").get().then(function (querySnapshot) {
+    //     querySnapshot.forEach(function (doc) {
+    //         var user = firebase.auth().currentUser;
+    //         const getUserFavorite = doc.data().uid
+    //         if (getUserFavorite.indexOf(user.uid) != -1) {
+    //             const result =
+    //                 /*html*/
+    //                 `<div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
+    //                 <div class="movietextbg">
+    //                     <div class="movietitle">${doc.data().title}</div>
+    //                 </div>
+    //             </div>`
+    //             $("#showmovieFavorite").append(result)
+    //         }
+    //     });
+    // });
 }
 
 function getprofileUser(data) {
@@ -88,21 +127,6 @@ function getprofileUser(data) {
         `<img src="${data.photoURL}" class="imgprofile" alt="" srcset="">
         <div class="profileName">${data.displayName}</div>`;
     $("#Profile").append(profile)
-}
-
-function getmovieFavourite() {
-    // db.collection("movies").get().then(function (querySnapshot) {
-    //     querySnapshot.forEach(function (doc) {
-    //         const result =
-    //             /*html*/
-    //             `<div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
-    //                 <div class="movietextbg">
-    //                     <div class="movietitle">${doc.data().title}</div>
-    //                 </div>
-    //             </div>`
-    //         $("#showmovieFavorite").append(result)
-    //     });
-    // });
 }
 
 function showPassword() {
@@ -178,34 +202,12 @@ function editProfile(data) {
     })
 }
 
-function getmoviefromSearch() {
-    const searchText = document.getElementById('searchResult').value
-    $("#searchItem").empty();
-    db.collection("movies").get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            const titlemovie = doc.data().title;
-            if (titlemovie.indexOf(searchText) != -1) {
-                const Result =
-                    /*html*/
-                    `<div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
-                        <div class="movietextbg">
-                            <div class="movietitle">${doc.data().title}</div>
-                        </div>
-                    </div>`
-                $("#searchItem").append(Result);
-            }
+function Logout() {
+    $("#Logout").click(function () {
+        firebase.auth().signOut().then(function () {
+            window.location.href = "login.html"
+        }).catch(function (error) {
+            // An error happened.
         });
-    });
-}
-
-function addmovieFavorite() {
-    // $("#addFavorite").click(function () {
-    //     var user = firebase.auth().currentUser;
-    //     console.log(user.uid);
-    // })
-    // db.collection("movies").doc("Anna").update({
-    //     uid: firebase.firestore.FieldValue.arrayUnion("Ekung")
-    // }).then(function () {
-    //     console.log("Document successfully updated!");
-    // });
+    })
 }
