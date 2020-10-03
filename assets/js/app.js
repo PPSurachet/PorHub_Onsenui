@@ -85,22 +85,23 @@ function getprofileUser(data) {
     const profile =
         /*html*/
         `<img src="${data.photoURL}" class="imgprofile" alt="" srcset="">
-                <div class="profileName">${data.displayName}</div>`;
+        <div class="profileName">${data.displayName}</div>`;
     $("#Profile").append(profile)
 }
 
 function getmovieFavourite() {
-    db.collection("movies").get().then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-            const result = ` 
-            <div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
-                <div class="movietextbg">
-                    <div class="movietitle">${doc.data().title}</div>
-                </div>
-            </div>`
-            $("#showmovieFavorite").append(result)
-        });
-    });
+    // db.collection("movies").get().then(function (querySnapshot) {
+    //     querySnapshot.forEach(function (doc) {
+    //         const result =
+    //             /*html*/
+    //             `<div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
+    //                 <div class="movietextbg">
+    //                     <div class="movietitle">${doc.data().title}</div>
+    //                 </div>
+    //             </div>`
+    //         $("#showmovieFavorite").append(result)
+    //     });
+    // });
 }
 
 function showPassword() {
@@ -149,23 +150,32 @@ function editProfile(data) {
         `<div class="text-center">
             <img src="${data.photoURL}" class="editImg" alt="" srcset="">
         </div>
-        <ons-list>
-            <ons-list-item class="row align-items-center">
-                <div class="left font-weight-bold">
-                    ID
-                </div>
-                <div class="center col-8">
-                    <input type="text" class="form-control" id="username" value="${data.displayName}">
-                </div>
-                <div class="right" id="saveEditProfile">
-                    <ons-icon size="40px" icon="md-edit"></ons-icon>
-                </div>
-            </ons-list-item>
-        </ons-list>`
+        <ons-row class="row align-items-center">
+            <div class="text-ifo">
+                ID
+            </div>
+            <div class="center col-8">
+                <input type="text" class="form-control" id="username" value="${data.displayName}">
+            </div>
+            <div class="right icon-pencil" id="saveEditProfile">
+                <ons-icon size="40px" icon="md-edit"></ons-icon>
+            </div>
+        </ons-row>`
     $("#showEditProfile").append(getprofile);
 
     $("#saveEditProfile").click(function () {
-        console.log("ENEE");
+        const newUsername = document.getElementById('username').value
+
+        var user = firebase.auth().currentUser;
+
+        user.updateProfile({
+            displayName: newUsername
+        }).then(function () {
+            location.reload();
+            document.querySelector('#Navigator_option').popPage();
+        }).catch(function (error) {
+            // An error happened.
+        });
     })
 
 }

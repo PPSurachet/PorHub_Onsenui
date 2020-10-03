@@ -8,8 +8,7 @@
     border-radius: 10px;
     border: 1px solid;
     box-shadow: 5px 5px 12px #616161;
-  
-  }
+}
 
 .searchtext{
     font-weight: bold;
@@ -19,6 +18,13 @@
 }
 
 .searchbar{
+    color: rgb(0, 0, 0);
+    margin-top: 1rem;
+    padding-left: 2rem;
+}
+
+.searchbar-darkmode{
+    color: rgb(255, 255, 255);
     margin-top: 1rem;
     padding-left: 2rem;
 }

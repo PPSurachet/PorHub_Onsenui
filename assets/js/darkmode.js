@@ -7,13 +7,17 @@ $(function () {
                 $('.page__background , .body').toggleClass('page__background-darkmode');
                 $('.switch__toggle').toggleClass('switch__toggle-darkmode');
                 $('svg').toggleClass('svg-darkmode');
+                $('.Profile').toggleClass('Profile-darkmode')
+                $('.searchbar').toggleClass('searchbar-darkmode')
             });
-        } else if (page.id == "changePass") {
+        } else if (page.id == "changePass" || page.id == "editProfile") {
             if (document.querySelector("#my-switch").checked) {
                 $('#changePass .page__background').css("background-color", "#2F2F2F");
-                $('.titleOP').css("color", "white");
+                $('#editProfile .page__background').css("background-color", "#2F2F2F");
+                $('.titleOP', 'body').css("color", "white");
                 $('svg').css("fill", "white");
                 $('.btn-lightmode').css("background-color", "#FA043F");
+                $('.btn-editProfile').css("background-color", "#FA043F");
             }
         }
 

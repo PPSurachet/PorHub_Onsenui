@@ -2,6 +2,19 @@ ons-list-item{
     font-size: 20px;
     height: 60px;
 }
+
+.Profile{
+    background-color: #efeff4;
+    color: black;
+    padding-left: 2rem;
+}
+
+.Profile-darkmode{
+    background-color: #2F2F2F;
+    color: white;
+    padding-left: 2rem;
+}
+
 .header{
     opacity: 0.5;
 }
@@ -118,6 +131,11 @@ ons-list-item{
     border: 7px solid #C4C4C4;
 }
 
+.text-ifo{
+    margin-left: 4rem;
+    font-size: 23px;
+}
+
 .textInput{
     font-size: 20px;
 }
@@ -137,4 +155,13 @@ ons-list-item{
     color: white;
     font-size: 18px;
     letter-spacing: 2px;
+}
+
+.editinput{
+    background-color:#efeff4;
+    color: black;
+}
+.editinput-darkmode{
+    background-color:#2F2F2F;
+    color: rgb(255, 255, 255);
 }

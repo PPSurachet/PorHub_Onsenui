@@ -44,7 +44,6 @@ ons-toolbar .center img{
     display: flex;
     align-items: center;
     padding-top: 1rem;
-    margin-right: 2rem;
 }
 .page__background-darkmode  {
     background-color: #2F2F2F;
