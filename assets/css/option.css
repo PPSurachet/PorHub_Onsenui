@@ -2,6 +2,19 @@ ons-list-item{
     font-size: 20px;
     height: 60px;
 }
+
+.Profile{
+    background-color: #efeff4;
+    color: black;
+    padding-left: 2rem;
+}
+
+.Profile-darkmode{
+    background-color: #2F2F2F;
+    color: white;
+    padding-left: 2rem;
+}
+
 .header{
     opacity: 0.5;
 }
@@ -21,7 +34,7 @@ ons-list-item{
     padding-left: 2rem;
     padding-right: 1rem;
     color: black;
-    background-color: #ffffff;
+    background-color: #efeff4;
 }
 
 .list-item-darkmode {
@@ -52,6 +65,20 @@ ons-list-item{
     background-color: #FA043F;
 }
 
+.switch__handle {
+    background-color: #ffffff;
+    transition-property: all;
+    transition-duration: .35s;
+    position: absolute;
+}
+
+/* .switch__toggle{
+    background-color: #573a3a88;
+    transition-property: all;
+    transition-duration: .35s;
+    position: absolute;
+} */
+
 .imgprofile{
     border-radius: 50px;
     width: 55px;
@@ -63,8 +90,78 @@ ons-list-item{
     font-size: 24px;
 }
 
-.area-margin{
-    display: flex;
-    align-items: center;
-    margin-right: 2rem;
+.btn-lightmode{
+    border: 0px;
+    background-color: #1E73F1;
+    border-radius: 10px;
+    color: white;
+    font-size: 30px;
+    letter-spacing: 2px;
+}
+
+.btn-darkmode{
+    border: 0px;
+    background-color: #FA043F;
+    border-radius: 10px;
+    color: white;
+    font-size: 30px;
+    letter-spacing: 2px;
+}
+
+.margin-input{
+    margin-top: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.form-group{
+    margin-bottom: 1.5rem;
+}
+
+.titleOP{
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.editImg{
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    width: 160px;
+    border-radius: 180px;
+    border: 7px solid #C4C4C4;
+}
+
+.text-ifo{
+    margin-left: 4rem;
+    font-size: 23px;
+}
+
+.textInput{
+    font-size: 20px;
+}
+
+.btn-editProfile{
+    margin-top: 1.5rem;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 0px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    background-color: #1E73F1;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.editinput{
+    background-color:#efeff4;
+    color: black;
+}
+.editinput-darkmode{
+    background-color:#2F2F2F;
+    color: rgb(255, 255, 255);
 }

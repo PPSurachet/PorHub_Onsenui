@@ -2,7 +2,10 @@
     font-family: 'Anton', sans-serif
 }
 .Cairo{
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Cairo', sans-serif
+}
+.Prompt{
+    font-family: 'Prompt', sans-serif;
 }
 .toolbar{
     height: 90px;
@@ -35,17 +38,17 @@ ons-toolbar .center img{
     vertical-align: top;
 }   
 .margin-start{
-    margin-top: 3.5rem;
+    margin-top: 2.75rem;
 }
-.page__background-darkmode{
+.area-margin{
+    display: flex;
+    align-items: center;
+    padding-top: 1rem;
+}
+.page__background-darkmode  {
     background-color: #2F2F2F;
     color: white;
 }
-.page__background{
-    background-color: #ffffff;
-    color: white;
-}
-
 .tabbar__icon {
     font-size: 30px;
     padding: 0;
@@ -60,10 +63,24 @@ ons-toolbar .center img{
 :checked+.tabbar__button{
     color: #000000;
 }
-
 .titlebar{
     font-weight: bold;
     font-size: 30px;
     margin-left: 1rem;
+}
+svg{
+    margin-right: 1rem;
+    margin-left: 1rem;
+    fill: black;
+    width: 20px;
+    height: 45px;
+}
+
+.svg-darkmode{
+    margin-right: 1rem;
+    margin-left: 1rem;
+    fill: white;
+    width: 20px;
+    height: 45px;
 }
 

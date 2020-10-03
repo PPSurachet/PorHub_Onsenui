@@ -21,12 +21,24 @@ $(function () {
 
     document.addEventListener('init', function (event) {
         var page = event.target;
-        if (page.id === "Option") {
-            Logout();
-        }
-        else if (page.id === "Favorite" ){
+
+        if (page.id === "Favorite") {
             getmovieFavourite();
-        
+
+        } else if (page.id === "Option") {
+            Logout();
+            document.querySelector("#ChangePassword").onclick = function () {
+                document.querySelector('#Navigator_option').pushPage("views/ChangePassword.html")
+            }
+            document.querySelector("#editProfile").onclick = function () {
+                document.querySelector('#Navigator_option').pushPage("views/editProfile.html")
+            }
+        } else if (page.id === "changePass") {
+            showPassword();
+            ChangePassword();
+        } else if (page.id === "editProfile") {
+            var user = firebase.auth().currentUser;
+            editProfile(user)
         }
     });
 
@@ -73,21 +85,114 @@ function getprofileUser(data) {
     const profile =
         /*html*/
         `<img src="${data.photoURL}" class="imgprofile" alt="" srcset="">
-                <div class="profileName">${data.displayName}</div>`;
+        <div class="profileName">${data.displayName}</div>`;
     $("#Profile").append(profile)
 }
 
 function getmovieFavourite() {
-    // db.collection("movies").get().then(function(querySnapshot) {
-    //     querySnapshot.forEach(function(doc) {     
-    //         const result = ` 
-    //         <div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
-    //             <div class="movietextbg">
-    //                 <div class="movietitle">${doc.data().title}</div>
-    //             </div>
-    //         </div>`
+    // db.collection("movies").get().then(function (querySnapshot) {
+    //     querySnapshot.forEach(function (doc) {
+    //         const result =
+    //             /*html*/
+    //             `<div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
+    //                 <div class="movietextbg">
+    //                     <div class="movietitle">${doc.data().title}</div>
+    //                 </div>
+    //             </div>`
     //         $("#showmovieFavorite").append(result)
-    //         console.log(doc.data().posterURL);
     //     });
     // });
+}
+
+function showPassword() {
+    $("#showPassword").click(function () {
+        var x = document.getElementById('oldpassword');
+        var z = document.getElementById('newpassword');
+        var y = document.getElementById('confirmpassword');
+        if (x.type === "password") {
+            z.type = "text"
+            x.type = "text";
+            y.type = "text";
+            $("#showPassword").text("Hide")
+        } else {
+            x.type = "password";
+            y.type = "password";
+            z.type = "password"
+            $("#showPassword").text("Show")
+        }
+    })
+}
+
+function ChangePassword() {
+    $("#confirmPassword").click(function () {
+        const newPass = document.getElementById('newpassword').value
+        const conPass = document.getElementById('confirmpassword').value
+
+        if (newPass == conPass) {
+            var user = firebase.auth().currentUser;
+            user.updatePassword(conPass).then(function () {
+                if (ons.notification.alert("Change password is complete")) {
+                    document.querySelector('#Navigator_option').popPage();
+                }
+            }).catch(function (error) {
+                // An error happened.
+            });
+        } else {
+            ons.notification.alert("Password isn't correct");
+        }
+
+    })
+}
+
+function editProfile(data) {
+    const getprofile =
+        /*html*/
+        `<div class="text-center">
+            <img src="${data.photoURL}" class="editImg" alt="" srcset="">
+        </div>
+        <ons-row class="row align-items-center">
+            <div class="text-ifo">
+                ID
+            </div>
+            <div class="center col-8">
+                <input type="text" class="form-control" id="username" value="${data.displayName}">
+            </div>
+            <div class="right icon-pencil" id="saveEditProfile">
+                <ons-icon size="40px" icon="md-edit"></ons-icon>
+            </div>
+        </ons-row>`
+    $("#showEditProfile").append(getprofile);
+
+    $("#saveEditProfile").click(function () {
+        const newUsername = document.getElementById('username').value
+        var user = firebase.auth().currentUser;
+        user.updateProfile({
+            displayName: newUsername
+        }).then(function () {
+            location.reload();
+            document.querySelector('#Navigator_option').popPage();
+        }).catch(function (error) {
+            // An error happened.
+        });
+    })
+}
+
+function getmoviefromSearch() {
+    const searchText = document.getElementById('searchResult').value
+    $("#searchItem").empty();
+    db.collection("movies").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            const titlemovie = doc.data().title;
+            if (titlemovie.indexOf(searchText) != -1) {
+                const Result =
+                    /*html*/
+                    `<div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
+                        <div class="movietextbg">
+                            <div class="movietitle">${doc.data().title}</div>
+                        </div>
+                    </div>`
+                $("#searchItem").append(Result);
+            }
+        });
+    });
 }
