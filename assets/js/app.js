@@ -165,9 +165,7 @@ function editProfile(data) {
 
     $("#saveEditProfile").click(function () {
         const newUsername = document.getElementById('username').value
-
         var user = firebase.auth().currentUser;
-
         user.updateProfile({
             displayName: newUsername
         }).then(function () {
@@ -177,5 +175,24 @@ function editProfile(data) {
             // An error happened.
         });
     })
+}
 
+function getmoviefromSearch() {
+    const searchText = document.getElementById('searchResult').value
+    $("#searchItem").empty();
+    db.collection("movies").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            const titlemovie = doc.data().title;
+            if (titlemovie.indexOf(searchText) != -1) {
+                const Result =
+                    /*html*/
+                    `<div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
+                        <div class="movietextbg">
+                            <div class="movietitle">${doc.data().title}</div>
+                        </div>
+                    </div>`
+                $("#searchItem").append(Result);
+            }
+        });
+    });
 }

@@ -5,9 +5,11 @@
             <ons-row class="d-flex align-items-center searchbar">
                 <ons-icon size="45px" icon="md-search"></ons-icon>
                 <div class="col-10">
-                    <input type="text" class="form-control" placeholder="Search" value="">
+                    <input type="text" class="form-control" placeholder="Search" id="searchResult"
+                        onchange="getmoviefromSearch()">
                 </div>
             </ons-row>
+            <ons-row id="searchItem"></ons-row>
         </ons-page>
     </template>
 </ons-page>
