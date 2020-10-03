@@ -21,10 +21,11 @@ $(function () {
 
     document.addEventListener('init', function (event) {
         var page = event.target;
+        if (page.id === "Home") {
 
-        if (page.id === "Favorite") {
+
+        } else if (page.id === "Favorite") {
             getmovieFavourite();
-
         } else if (page.id === "Option") {
             Logout();
             document.querySelector("#ChangePassword").onclick = function () {
@@ -195,4 +196,16 @@ function getmoviefromSearch() {
             }
         });
     });
+}
+
+function addmovieFavorite() {
+    // $("#addFavorite").click(function () {
+    //     var user = firebase.auth().currentUser;
+    //     console.log(user.uid);
+    // })
+    // db.collection("movies").doc("Anna").update({
+    //     uid: firebase.firestore.FieldValue.arrayUnion("Ekung")
+    // }).then(function () {
+    //     console.log("Document successfully updated!");
+    // });
 }
