@@ -80,9 +80,21 @@ function getmovieDetail() {
     //         `<div class="area-imgDetail">
     //             <img src="${doc.data().posterURL}" class="imgDetail" alt="" srcset="">
     //         </div>
-    //         <ons-row class="area-categoryDetail Prompt" id="CategoryMovie">
-
-    //         </ons-row>`
+    //         <ons-row class="area-categoryDetail Prompt" id="CategoryMovie"></ons-row>
+    //         <div class="bg-buttonDetail text-center">
+    //             <div class="area-btn">
+    //                 <button type="button" class="favorite-btn btn-lg btn-block">Add Favourite</button>
+    //             </div>
+    //             <div class="area-btn">
+    //                 <button type="button" class="trailer-btn btn-lg btn-block">Watch Trailer</button>
+    //             </div>
+    //             <div class="area-btn">
+    //                 <button type="button" class="play-btn btn-lg btn-block">PLAY</button>
+    //             </div>
+    //             <div class="review-text">
+    //                 ${doc.data().review}
+    //             </div>
+    //         </div>`
     //     $("#getMovieDetail").append(result)
 
     //     const getCategory = doc.data().category;
