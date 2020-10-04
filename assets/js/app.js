@@ -21,7 +21,7 @@ $(function () {
     document.addEventListener('init', function (event) {
         var page = event.target;
         if (page.id === "Home") {
-            addmovieFavorite();
+
         } else if (page.id === "Favorite") {
             getmovieFavourite();
         } else if (page.id === "Option") {
@@ -73,6 +73,30 @@ function checkUserLogin() {
     });
 }
 
+function getmovieDetail() {
+    // db.collection("movies").doc("Anna").get().then(function (doc) {
+    //     const result =
+    //         /*html*/
+    //         `<div class="area-imgDetail">
+    //             <img src="${doc.data().posterURL}" class="imgDetail" alt="" srcset="">
+    //         </div>
+    //         <ons-row class="area-categoryDetail Prompt" id="CategoryMovie">
+
+    //         </ons-row>`
+    //     $("#getMovieDetail").append(result)
+
+    //     const getCategory = doc.data().category;
+    //     for (var i = 0; i < getCategory.length; i++) {
+    //         const Category =
+    //             /*html*/
+    //             `<div class="categoryDetail">${getCategory[i]}</div>`
+    //         $("#CategoryMovie").append(Category)
+    //     }
+    // }).catch(function (error) {
+    //     console.log("Error getting cached document:", error);
+    // });
+}
+
 function getmoviefromSearch() {
     const searchText = document.getElementById('searchResult').value
     const newsearchText = searchText.replace(/ /g, "");
@@ -84,11 +108,11 @@ function getmoviefromSearch() {
             if (newtitlemovie.toLowerCase().indexOf(newsearchText.toLowerCase()) != -1) {
                 const Result =
                     /*html*/
-                    `<div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
-                        <div class="movietextbg">
-                            <div class="movietitle">${doc.data().title}</div>
-                        </div>
-                    </div>`
+                    `<div div class="imgfav d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
+            <div class="movietextbg">
+                <div class="movietitle">${doc.data().title}</div>
+            </div>
+                    </div > `
                 $("#searchItem").append(Result);
             }
         });
@@ -116,7 +140,7 @@ function getmovieFavourite() {
     //         if (getUserFavorite.indexOf(user.uid) != -1) {
     //             const result =
     //                 /*html*/
-    //                 `<div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
+    //                 `<div div class="imgfav d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
     //                 <div class="movietextbg">
     //                     <div class="movietitle">${doc.data().title}</div>
     //                 </div>
