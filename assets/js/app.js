@@ -14,7 +14,6 @@ firebase.analytics();
 
 var db = firebase.firestore();
 
-
 $(function () {
 
     checkUserLogin();
@@ -39,6 +38,9 @@ $(function () {
         } else if (page.id === "editProfile") {
             var user = firebase.auth().currentUser;
             editProfile(user)
+            document.querySelector("#userPhoto").onclick = function () {
+                document.querySelector('#Navigator_option').pushPage("views/ChangePicture.html")
+            }
         }
     });
 
@@ -73,11 +75,13 @@ function checkUserLogin() {
 
 function getmoviefromSearch() {
     const searchText = document.getElementById('searchResult').value
+    const newsearchText = searchText.replace(/ /g, "");
     $("#searchItem").empty();
     db.collection("movies").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             const titlemovie = doc.data().title;
-            if (titlemovie.indexOf(searchText) != -1) {
+            const newtitlemovie = titlemovie.replace(/ /g, "");
+            if (newtitlemovie.toLowerCase().indexOf(newsearchText.toLowerCase()) != -1) {
                 const Result =
                     /*html*/
                     `<div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
@@ -94,15 +98,17 @@ function getmoviefromSearch() {
 function addmovieFavorite() {
     // $("#addFavorite").click(function () {
     //     var user = firebase.auth().currentUser;
-    //     db.collection("movies").doc("God").update({
+    //     db.collection("movies").doc("Anna").update({
     //         uid: firebase.firestore.FieldValue.arrayUnion(user.uid)
     //     }).then(function () {
     //         console.log("Document successfully updated!");
+    //         getmovieFavourite();
     //     });
     // })
 }
 
 function getmovieFavourite() {
+    // $("#showmovieFavorite").empty();
     // db.collection("movies").get().then(function (querySnapshot) {
     //     querySnapshot.forEach(function (doc) {
     //         var user = firebase.auth().currentUser;
@@ -121,7 +127,14 @@ function getmovieFavourite() {
     // });
 }
 
+function deletemovieFavourite() {
+    // $("#delFavorite").click(function () {
+
+    // })
+}
+
 function getprofileUser(data) {
+    $("#Profile").empty();
     const profile =
         /*html*/
         `<img src="${data.photoURL}" class="imgprofile" alt="" srcset="">
@@ -170,23 +183,17 @@ function ChangePassword() {
 }
 
 function editProfile(data) {
-    const getprofile =
+    const getUserPhoto =
         /*html*/
         `<div class="text-center">
             <img src="${data.photoURL}" class="editImg" alt="" srcset="">
-        </div>
-        <ons-row class="row align-items-center">
-            <div class="text-ifo">
-                ID
-            </div>
-            <div class="center col-8">
-                <input type="text" class="form-control" id="username" value="${data.displayName}">
-            </div>
-            <div class="right icon-pencil" id="saveEditProfile">
-                <ons-icon size="40px" icon="md-edit"></ons-icon>
-            </div>
-        </ons-row>`
-    $("#showEditProfile").append(getprofile);
+        </div>`
+    $("#userPhoto").append(getUserPhoto);
+
+    const getUserName =
+        /*html*/
+        `<input type="text" class="form-control" id="username" value="${data.displayName}">`
+    $("#userName").append(getUserName);
 
     $("#saveEditProfile").click(function () {
         const newUsername = document.getElementById('username').value
@@ -194,7 +201,7 @@ function editProfile(data) {
         user.updateProfile({
             displayName: newUsername
         }).then(function () {
-            location.reload();
+            getprofileUser(user);
             document.querySelector('#Navigator_option').popPage();
         }).catch(function (error) {
             // An error happened.
