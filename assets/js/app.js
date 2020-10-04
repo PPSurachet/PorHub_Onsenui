@@ -38,6 +38,9 @@ $(function () {
         } else if (page.id === "editProfile") {
             var user = firebase.auth().currentUser;
             editProfile(user)
+            document.querySelector("#userPhoto").onclick = function () {
+                document.querySelector('#Navigator_option').pushPage("views/ChangePicture.html")
+            }
         }
     });
 
@@ -72,11 +75,13 @@ function checkUserLogin() {
 
 function getmoviefromSearch() {
     const searchText = document.getElementById('searchResult').value
+    const newsearchText = searchText.replace(/ /g, "");
     $("#searchItem").empty();
     db.collection("movies").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             const titlemovie = doc.data().title;
-            if (titlemovie.indexOf(searchText) != -1) {
+            const newtitlemovie = titlemovie.replace(/ /g, "");
+            if (newtitlemovie.toLowerCase().indexOf(newsearchText.toLowerCase()) != -1) {
                 const Result =
                     /*html*/
                     `<div class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); ">
