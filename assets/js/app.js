@@ -14,7 +14,6 @@ firebase.analytics();
 
 var db = firebase.firestore();
 
-
 $(function () {
 
     checkUserLogin();
@@ -94,16 +93,17 @@ function getmoviefromSearch() {
 function addmovieFavorite() {
     // $("#addFavorite").click(function () {
     //     var user = firebase.auth().currentUser;
-    //     db.collection("movies").doc("Frozen").update({
+    //     db.collection("movies").doc("Anna").update({
     //         uid: firebase.firestore.FieldValue.arrayUnion(user.uid)
     //     }).then(function () {
-    //         location.reload();
     //         console.log("Document successfully updated!");
+    //         getmovieFavourite();
     //     });
     // })
 }
 
 function getmovieFavourite() {
+    // $("#showmovieFavorite").empty();
     // db.collection("movies").get().then(function (querySnapshot) {
     //     querySnapshot.forEach(function (doc) {
     //         var user = firebase.auth().currentUser;
