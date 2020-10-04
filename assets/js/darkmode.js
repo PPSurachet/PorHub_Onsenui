@@ -18,6 +18,7 @@ $(function () {
                 $('svg').css("fill", "white");
                 $('.btn-lightmode').css("background-color", "#FA043F");
                 $('.btn-editProfile').css("background-color", "#FA043F");
+                $('.title-username , .icon-pencil').css("color", "white");
             }
         }
 

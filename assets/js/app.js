@@ -94,9 +94,10 @@ function getmoviefromSearch() {
 function addmovieFavorite() {
     // $("#addFavorite").click(function () {
     //     var user = firebase.auth().currentUser;
-    //     db.collection("movies").doc("God").update({
+    //     db.collection("movies").doc("Frozen").update({
     //         uid: firebase.firestore.FieldValue.arrayUnion(user.uid)
     //     }).then(function () {
+    //         location.reload();
     //         console.log("Document successfully updated!");
     //     });
     // })
@@ -170,23 +171,17 @@ function ChangePassword() {
 }
 
 function editProfile(data) {
-    const getprofile =
+    const getUserPhoto =
         /*html*/
         `<div class="text-center">
             <img src="${data.photoURL}" class="editImg" alt="" srcset="">
-        </div>
-        <ons-row class="row align-items-center">
-            <div class="text-ifo">
-                ID
-            </div>
-            <div class="center col-8">
-                <input type="text" class="form-control" id="username" value="${data.displayName}">
-            </div>
-            <div class="right icon-pencil" id="saveEditProfile">
-                <ons-icon size="40px" icon="md-edit"></ons-icon>
-            </div>
-        </ons-row>`
-    $("#showEditProfile").append(getprofile);
+        </div>`
+    $("#userPhoto").append(getUserPhoto);
+
+    const getUserName =
+        /*html*/
+        `<input type="text" class="form-control" id="username" value="${data.displayName}">`
+    $("#userName").append(getUserName);
 
     $("#saveEditProfile").click(function () {
         const newUsername = document.getElementById('username').value

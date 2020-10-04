@@ -131,11 +131,6 @@ ons-list-item{
     border: 7px solid #C4C4C4;
 }
 
-.text-ifo{
-    margin-left: 4rem;
-    font-size: 23px;
-}
-
 .textInput{
     font-size: 20px;
 }
@@ -164,4 +159,8 @@ ons-list-item{
 .editinput-darkmode{
     background-color:#2F2F2F;
     color: rgb(255, 255, 255);
+}
+.title-username{
+    margin-left: 4rem;
+    font-size: 23px;
 }
