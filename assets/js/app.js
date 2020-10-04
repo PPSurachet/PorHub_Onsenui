@@ -122,7 +122,14 @@ function getmovieFavourite() {
     // });
 }
 
+function deletemovieFavourite() {
+    // $("#delFavorite").click(function () {
+
+    // })
+}
+
 function getprofileUser(data) {
+    $("#Profile").empty();
     const profile =
         /*html*/
         `<img src="${data.photoURL}" class="imgprofile" alt="" srcset="">
@@ -189,7 +196,7 @@ function editProfile(data) {
         user.updateProfile({
             displayName: newUsername
         }).then(function () {
-            location.reload();
+            getprofileUser(user);
             document.querySelector('#Navigator_option').popPage();
         }).catch(function (error) {
             // An error happened.
