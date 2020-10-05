@@ -22,6 +22,8 @@ $(function () {
         var page = event.target;
         if (page.id === "Home") {
             getmovieDetail();
+        } else if(page.id === "Search"){
+            getmovieCategory();
         } else if (page.id === "Favorite") {
             getmovieFavourite();
         } else if (page.id === "Option") {
@@ -71,56 +73,56 @@ function checkUserLogin() {
 }
 
 function getmovieDetail() {
-    $("#MovieDetail").empty();
-    db.collection("movies").doc("Anna").get().then(function (doc) {
-        const result =
-            /*html*/
-            `<div class="area-imgDetail">
-                <img src="${doc.data().posterURL}" class="imgDetail" alt="" srcset="">
-            </div>
-            <ons-row class="area-categoryDetail Prompt" id="CategoryMovie"></ons-row>
-            <div class="bg-buttonDetail text-center">
-                <div class="area-btn" id="btnFavorite">
+    // $("#MovieDetail").empty();
+    // db.collection("movies").doc("Anna").get().then(function (doc) {
+    //     const result =
+    //         /*html*/
+    //         `<div class="area-imgDetail">
+    //             <img src="${doc.data().posterURL}" class="imgDetail" alt="" srcset="">
+    //         </div>
+    //         <ons-row class="area-categoryDetail Prompt" id="CategoryMovie"></ons-row>
+    //         <div class="bg-buttonDetail text-center">
+    //             <div class="area-btn" id="btnFavorite">
 
-                </div>
-                <div class="area-btn">
-                    <button type="button" class="trailer-btn btn-lg btn-block">Watch Trailer</button>
-                </div>
-                <div class="area-btn">
-                    <button type="button" class="play-btn btn-lg btn-block">PLAY</button>
-                </div>
-                <div class="review-text">
-                    ${doc.data().review}
-                </div>
-            </div>`
-        $("#MovieDetail").append(result)
-        // <iframe width = "100%" height = "50%" src = "https://www.youtube.com/embed/" allowfullscreen ></iframe >
-        const getCategory = doc.data().category;
-        for (var i = 0; i < getCategory.length; i++) {
-            const Category =
-                /*html*/
-                `<div class="categoryDetail">${getCategory[i]}</div>`
-            $("#CategoryMovie").append(Category)
-        }
+    //             </div>
+    //             <div class="area-btn">
+    //                 <button type="button" class="trailer-btn btn-lg btn-block">Watch Trailer</button>
+    //             </div>
+    //             <div class="area-btn">
+    //                 <button type="button" class="play-btn btn-lg btn-block">PLAY</button>
+    //             </div>
+    //             <div class="review-text">
+    //                 ${doc.data().review}
+    //             </div>
+    //         </div>`
+    //     $("#MovieDetail").append(result)
+    //     // <iframe width = "100%" height = "50%" src = "https://www.youtube.com/embed/" allowfullscreen ></iframe >
+    //     const getCategory = doc.data().category;
+    //     for (var i = 0; i < getCategory.length; i++) {
+    //         const Category =
+    //             /*html*/
+    //             `<div class="categoryDetail">${getCategory[i]}</div>`
+    //         $("#CategoryMovie").append(Category)
+    //     }
 
-        var user = firebase.auth().currentUser;
-        if (doc.data().uid.indexOf(user.uid) != -1) {
-            const RevFavor =
-                /*html*/
-                `<button type="button" class="favorite-btn btn-lg btn-block" id="RemoveFavorite">Remove Favourite</button>`
-            $("#btnFavorite").append(RevFavor)
-        } else {
-            const addFavor =
-                /*html*/
-                `<button type="button" class="favorite-btn btn-lg btn-block" id="addFavorite">Add Favourite</button>`
-            $("#btnFavorite").append(addFavor)
-        }
-        addmovieFavorite(doc.data())
+    //     var user = firebase.auth().currentUser;
+    //     if (doc.data().uid.indexOf(user.uid) != -1) {
+    //         const RevFavor =
+    //             /*html*/
+    //             `<button type="button" class="favorite-btn btn-lg btn-block" id="RemoveFavorite">Remove Favourite</button>`
+    //         $("#btnFavorite").append(RevFavor)
+    //     } else {
+    //         const addFavor =
+    //             /*html*/
+    //             `<button type="button" class="favorite-btn btn-lg btn-block" id="addFavorite">Add Favourite</button>`
+    //         $("#btnFavorite").append(addFavor)
+    //     }
+    //     addmovieFavorite(doc.data())
 
 
-    }).catch(function (error) {
-        console.log("Error getting cached document:", error);
-    });
+    // }).catch(function (error) {
+    //     console.log("Error getting cached document:", error);
+    // });
 }
 
 function getmoviefromSearch() {
@@ -143,6 +145,12 @@ function getmoviefromSearch() {
             }
         });
     });
+}
+
+function getmovieCategory(){
+    $("ons-carousel-item button").click(function(){
+        console.log($(this).attr('id'));
+    })
 }
 
 function addmovieFavorite(data) {

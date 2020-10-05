@@ -100,3 +100,15 @@
     margin-top: 1rem;
     color: white;
 }
+.tagbut{
+    border-radius: 30px;
+    width: 100px;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    
+}
+.marginAddon{
+    margin-left: 0;
+    margin-right: 0;
+    
+}
