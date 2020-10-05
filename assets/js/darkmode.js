@@ -10,7 +10,7 @@ $(function () {
                 $('.Profile').toggleClass('Profile-darkmode')
                 $('.searchbar').toggleClass('searchbar-darkmode')
             });
-        } else if (page.id == "changePass" || page.id == "editProfile" || page.id == "changePicture") {
+        } else if (page.id == "editProfile" || page.id == "changePicture") {
             if (document.querySelector("#my-switch").checked) {
                 $('#changePass .page__background').css("background-color", "#2F2F2F");
                 $('#editProfile .page__background').css("background-color", "#2F2F2F");
