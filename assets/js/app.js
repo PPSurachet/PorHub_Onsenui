@@ -74,7 +74,8 @@ function checkUserLogin() {
 }
 
 function getmovieDetail() {
-    // db.collection("movies").doc("Anna").get().then(function (doc) {
+    // $("#MovieDetail").empty();
+    // db.collection("movies").doc("SKY").get().then(function (doc) {
     //     const result =
     //         /*html*/
     //         `<div class="area-imgDetail">
@@ -82,8 +83,8 @@ function getmovieDetail() {
     //         </div>
     //         <ons-row class="area-categoryDetail Prompt" id="CategoryMovie"></ons-row>
     //         <div class="bg-buttonDetail text-center">
-    //             <div class="area-btn">
-    //                 <button type="button" class="favorite-btn btn-lg btn-block">Add Favourite</button>
+    //             <div class="area-btn" id="btnFavorite">
+
     //             </div>
     //             <div class="area-btn">
     //                 <button type="button" class="trailer-btn btn-lg btn-block">Watch Trailer</button>
@@ -95,8 +96,8 @@ function getmovieDetail() {
     //                 ${doc.data().review}
     //             </div>
     //         </div>`
-    //     $("#getMovieDetail").append(result)
-
+    //     $("#MovieDetail").append(result)
+    //     // <iframe width = "100%" height = "50%" src = "https://www.youtube.com/embed/" allowfullscreen ></iframe >
     //     const getCategory = doc.data().category;
     //     for (var i = 0; i < getCategory.length; i++) {
     //         const Category =
@@ -104,6 +105,22 @@ function getmovieDetail() {
     //             `<div class="categoryDetail">${getCategory[i]}</div>`
     //         $("#CategoryMovie").append(Category)
     //     }
+
+    //     var user = firebase.auth().currentUser;
+    //     if (doc.data().uid.indexOf(user.uid) != -1) {
+    //         const RevFavor =
+    //             /*html*/
+    //             `<button type="button" class="favorite-btn btn-lg btn-block" id="RemoveFavorite">Remove Favourite</button>`
+    //         $("#btnFavorite").append(RevFavor)
+    //     } else {
+    //         const addFavor =
+    //             /*html*/
+    //             `<button type="button" class="favorite-btn btn-lg btn-block" id="addFavorite">Add Favourite</button>`
+    //         $("#btnFavorite").append(addFavor)
+    //     }
+    //     addmovieFavorite(doc.data())
+
+
     // }).catch(function (error) {
     //     console.log("Error getting cached document:", error);
     // });
@@ -131,42 +148,52 @@ function getmoviefromSearch() {
     });
 }
 
-function addmovieFavorite() {
-    // $("#addFavorite").click(function () {
-    //     var user = firebase.auth().currentUser;
-    //     db.collection("movies").doc("Anna").update({
-    //         uid: firebase.firestore.FieldValue.arrayUnion(user.uid)
-    //     }).then(function () {
-    //         console.log("Document successfully updated!");
-    //         getmovieFavourite();
-    //     });
+function addmovieFavorite(data) {
+    // $("button").click(function () {
+    //     if (this.id == "addFavorite") {
+    //         $(this).html("Remove Favorite")
+    //         $(this).attr("id", "RemoveFavorite")
+    //         var user = firebase.auth().currentUser;
+    //         db.collection("movies").doc(data.id).update({
+    //             uid: firebase.firestore.FieldValue.arrayUnion(user.uid)
+    //         }).then(function () {
+    //             console.log("Document successfully Updated!");
+    //             getmovieFavourite();
+    //         });
+    //     } else if (this.id == "RemoveFavorite") {
+    //         $(this).html("Add Favorite")
+    //         $(this).attr("id", "addFavorite")
+    //         var user = firebase.auth().currentUser;
+    //         if (data.uid.indexOf(user.uid) != -1) {
+    //             db.collection("movies").doc(data.id).update({
+    //                 uid: firebase.firestore.FieldValue.arrayRemove(user.uid)
+    //             }).then(function () {
+    //                 console.log("Document successfully Deleted!");
+    //                 getmovieFavourite();
+    //             });
+    //         }
+    //     }
     // })
 }
 
 function getmovieFavourite() {
-    // $("#showmovieFavorite").empty();
-    // db.collection("movies").get().then(function (querySnapshot) {
-    //     querySnapshot.forEach(function (doc) {
-    //         var user = firebase.auth().currentUser;
-    //         const getUserFavorite = doc.data().uid
-    //         if (getUserFavorite.indexOf(user.uid) != -1) {
-    //             const result =
-    //                 /*html*/
-    //                 `<div div class="imgfav d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
-    //                 <div class="movietextbg">
-    //                     <div class="movietitle">${doc.data().title}</div>
-    //                 </div>
-    //             </div>`
-    //             $("#showmovieFavorite").append(result)
-    //         }
-    //     });
-    // });
-}
-
-function deletemovieFavourite() {
-    // $("#delFavorite").click(function () {
-
-    // })
+    $("#showmovieFavorite").empty();
+    db.collection("movies").get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+            var user = firebase.auth().currentUser;
+            const getUserFavorite = doc.data().uid
+            if (getUserFavorite.indexOf(user.uid) != -1) {
+                const result =
+                    /*html*/
+                    `<div div class="imgfav d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
+                    <div class="movietextbg">
+                        <div class="movietitle">${doc.data().title}</div>
+                    </div>
+                </div>`
+                $("#showmovieFavorite").append(result)
+            }
+        });
+    });
 }
 
 function getprofileUser(data) {

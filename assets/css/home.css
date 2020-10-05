@@ -1,0 +1,72 @@
+.area-imgDetail{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.imgDetail{
+    border-radius: 15px;
+    width: 70%;
+}
+
+.area-categoryDetail{
+    display: flex;
+    justify-content: center;
+}
+
+.categoryDetail{
+    font-weight: bold;
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+    margin-right: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid;
+    border-radius: 15px;
+    background-color: #1E73F1;
+    color: white;
+}
+
+.bg-buttonDetail{
+    background-color: black;
+    padding-bottom: 1rem;
+}
+
+.area-btn{
+    padding-top: 1rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+.favorite-btn{
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 25px;
+    background-color: #E7184A;
+    color: white;
+}
+
+.trailer-btn{
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 25px;
+    background-color: #F8F8F8;
+    color: #160101;
+}
+
+.play-btn{
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 25px;
+    background-color: #1E73F1;
+    color: white;
+}
+
+.review-text{
+    text-align: justify;
+    margin-left: 1.8rem;
+    margin-right: 1.8rem;
+    margin-top: 1rem;
+    color: white;
+}
