@@ -32,7 +32,6 @@ $(function () {
 
     })
 
-
     $("#showPassword").click(function () {
         var x = document.getElementById('password');
 
@@ -44,4 +43,9 @@ $(function () {
             $("#showPassword").text("Show")
         }
     })
+
+    // $("#signInWithGoogle").click(function () {
+    //     var provider = new firebase.auth.GoogleAuthProvider();
+    //     firebase.auth().signInWithRedirect(provider);
+    // })
 });
