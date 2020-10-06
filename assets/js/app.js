@@ -21,8 +21,8 @@ $(function () {
     document.addEventListener('init', function (event) {
         var page = event.target;
         if (page.id === "Home") {
-            
-        } else if(page.id === "Search"){
+
+        } else if (page.id === "Search") {
             getmovieCategory();
         } else if (page.id === "Favorite") {
             getmovieFavourite();
@@ -120,7 +120,6 @@ function getmovieDetail(Target) {
         }
         addmovieFavorite(doc.data())
 
-
     }).catch(function (error) {
         console.log("Error getting cached document:", error);
     });
@@ -137,21 +136,26 @@ function getmoviefromSearch() {
             if (newtitlemovie.toLowerCase().indexOf(newsearchText.toLowerCase()) != -1) {
                 const Result =
                     /*html*/
-                    `<div div class="imgfav d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
-            <div class="movietextbg">
-                <div class="movietitle">${doc.data().title}</div>
-            </div>
-                    </div > `
+                    `<div id="${doc.data().id}" class="imgfav d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
+                        <div class="movietextbg">
+                            <div class="movietitle">${doc.data().title}</div>
+                        </div>
+                    </div >`
                 $("#searchItem").append(Result);
             }
+        });
+        $("#searchItem div").click(function () {
+            const movieTarget = $(this).attr('id');
+            getmovieDetail(movieTarget);
+            document.querySelector("#Navigator_search").pushPage("views/movieDetail.html");
         });
     });
 }
 
-function getmovieCategory(){
-    $("ons-carousel-item button").click(function(){
+function getmovieCategory() {
+    $("ons-carousel-item button").click(function () {
         $("#searchItem").empty();
-        const targetCategory = $(this).attr('id') 
+        const targetCategory = $(this).attr('id')
         db.collection("movies").get().then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 const category = doc.data().category
@@ -166,25 +170,22 @@ function getmovieCategory(){
                     $("#searchItem").append(result);
                 }
             });
-            $("#searchItem div").click(function(){
-                const movieTarget =  $(this).attr('id');
+            $("#searchItem div").click(function () {
+                const movieTarget = $(this).attr('id');
                 getmovieDetail(movieTarget);
                 document.querySelector("#Navigator_search").pushPage("views/movieDetail.html");
-                document.querySelector('ons-back-button').onclick = function(){
-                    document.querySelector('#Navigator_search').popPage();
-                }
-                
             });
         });
     })
 }
 
 function addmovieFavorite(data) {
-    $("button").click(function () {
+    $("#btnFavorite button").click(function () {
+        console.log($(this).attr('id'));
+        var user = firebase.auth().currentUser;
         if (this.id == "addFavorite") {
             $(this).html("Remove Favorite")
             $(this).attr("id", "RemoveFavorite")
-            var user = firebase.auth().currentUser;
             db.collection("movies").doc(data.id).update({
                 uid: firebase.firestore.FieldValue.arrayUnion(user.uid)
             }).then(function () {
@@ -194,15 +195,12 @@ function addmovieFavorite(data) {
         } else if (this.id == "RemoveFavorite") {
             $(this).html("Add Favorite")
             $(this).attr("id", "addFavorite")
-            var user = firebase.auth().currentUser;
-            if (data.uid.indexOf(user.uid) != -1) {
-                db.collection("movies").doc(data.id).update({
-                    uid: firebase.firestore.FieldValue.arrayRemove(user.uid)
-                }).then(function () {
-                    console.log("Document successfully Deleted!");
-                    getmovieFavourite();
-                });
-            }
+            db.collection("movies").doc(data.id).update({
+                uid: firebase.firestore.FieldValue.arrayRemove(user.uid)
+            }).then(function () {
+                console.log("Document successfully Deleted!");
+                getmovieFavourite();
+            });
         }
     })
 }
