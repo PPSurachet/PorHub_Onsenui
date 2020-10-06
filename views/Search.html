@@ -3,11 +3,12 @@
     <template id="Search.html">
         <ons-page id="Search" class="margin-start Cairo">
             <ons-row class="d-flex align-items-center searchbar">
-                <ons-icon size="45px" icon="md-search"></ons-icon>
-                <div class="col-10">
-                    <input type="text" class="form-control" placeholder="Search" id="searchResult"
+                <img src="/assets/image/burger.png" width="40px" alt="" srcset="">
+                <div class="col-9">
+                    <input style="border-radius: 20px;" type="text" class="form-control" placeholder="Search" id="searchResult"
                         onchange="getmoviefromSearch()">
                 </div>
+                <ons-icon size="45px" icon="md-search"  onchange="getmoviefromSearch()"></ons-icon>
             </ons-row>
             <ons-carousel item-width="115px" style="text-align: center; padding-left: 1rem;" swipeable auto-scroll overscrollable>
                     <ons-carousel-item class="marginAddon">
@@ -27,6 +28,12 @@
                     </ons-carousel-item>      
                     <ons-carousel-item class="marginAddon">
                         <button type="button" class="btn btn-primary tagbut" id="Thriller">Thriller</button>
+                    </ons-carousel-item>
+                    <ons-carousel-item class="marginAddon">
+                        <button type="button" class="btn btn-primary tagbut" id="Animation">Animation</button>
+                    </ons-carousel-item>
+                    <ons-carousel-item class="marginAddon">
+                        <button type="button" class="btn btn-primary tagbut" id="Sci-Fi">Sci-Fi</button>
                     </ons-carousel-item>
             </ons-carousel>
             <ons-row id="searchItem"></ons-row>

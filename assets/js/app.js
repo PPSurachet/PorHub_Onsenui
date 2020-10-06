@@ -21,7 +21,7 @@ $(function () {
     document.addEventListener('init', function (event) {
         var page = event.target;
         if (page.id === "Home") {
-            getmovieDetail();
+            
         } else if(page.id === "Search"){
             getmovieCategory();
         } else if (page.id === "Favorite") {
@@ -72,57 +72,58 @@ function checkUserLogin() {
     });
 }
 
-function getmovieDetail() {
-    // $("#MovieDetail").empty();
-    // db.collection("movies").doc("Anna").get().then(function (doc) {
-    //     const result =
-    //         /*html*/
-    //         `<div class="area-imgDetail">
-    //             <img src="${doc.data().posterURL}" class="imgDetail" alt="" srcset="">
-    //         </div>
-    //         <ons-row class="area-categoryDetail Prompt" id="CategoryMovie"></ons-row>
-    //         <div class="bg-buttonDetail text-center">
-    //             <div class="area-btn" id="btnFavorite">
+function getmovieDetail(Target) {
+    console.log(Target);
+    $("#MovieDetail").empty();
+    db.collection("movies").doc(Target).get().then(function (doc) {
+        const result =
+            /*html*/
+            `<div class="area-imgDetail">
+                <img src="${doc.data().posterURL}" class="imgDetail" alt="" srcset="">
+            </div>
+            <ons-row class="area-categoryDetail Prompt" id="CategoryMovie"></ons-row>
+            <div class="bg-buttonDetail text-center">
+                <div class="area-btn" id="btnFavorite">
 
-    //             </div>
-    //             <div class="area-btn">
-    //                 <button type="button" class="trailer-btn btn-lg btn-block">Watch Trailer</button>
-    //             </div>
-    //             <div class="area-btn">
-    //                 <button type="button" class="play-btn btn-lg btn-block">PLAY</button>
-    //             </div>
-    //             <div class="review-text">
-    //                 ${doc.data().review}
-    //             </div>
-    //         </div>`
-    //     $("#MovieDetail").append(result)
-    //     // <iframe width = "100%" height = "50%" src = "https://www.youtube.com/embed/" allowfullscreen ></iframe >
-    //     const getCategory = doc.data().category;
-    //     for (var i = 0; i < getCategory.length; i++) {
-    //         const Category =
-    //             /*html*/
-    //             `<div class="categoryDetail">${getCategory[i]}</div>`
-    //         $("#CategoryMovie").append(Category)
-    //     }
+                </div>
+                <div class="area-btn">
+                    <button type="button" class="trailer-btn btn-lg btn-block">Watch Trailer</button>
+                </div>
+                <div class="area-btn">
+                    <button type="button" class="play-btn btn-lg btn-block">PLAY</button>
+                </div>
+                <div class="review-text">
+                    ${doc.data().review}
+                </div>
+            </div>`
+        $("#showMovieDetail").append(result)
+        // <iframe width = "100%" height = "50%" src = "https://www.youtube.com/embed/" allowfullscreen ></iframe >
+        const getCategory = doc.data().category;
+        for (var i = 0; i < getCategory.length; i++) {
+            const Category =
+                /*html*/
+                `<div class="categoryDetail">${getCategory[i]}</div>`
+            $("#CategoryMovie").append(Category)
+        }
 
-    //     var user = firebase.auth().currentUser;
-    //     if (doc.data().uid.indexOf(user.uid) != -1) {
-    //         const RevFavor =
-    //             /*html*/
-    //             `<button type="button" class="favorite-btn btn-lg btn-block" id="RemoveFavorite">Remove Favourite</button>`
-    //         $("#btnFavorite").append(RevFavor)
-    //     } else {
-    //         const addFavor =
-    //             /*html*/
-    //             `<button type="button" class="favorite-btn btn-lg btn-block" id="addFavorite">Add Favourite</button>`
-    //         $("#btnFavorite").append(addFavor)
-    //     }
-    //     addmovieFavorite(doc.data())
+        var user = firebase.auth().currentUser;
+        if (doc.data().uid.indexOf(user.uid) != -1) {
+            const RevFavor =
+                /*html*/
+                `<button type="button" class="favorite-btn btn-lg btn-block" id="RemoveFavorite">Remove Favourite</button>`
+            $("#btnFavorite").append(RevFavor)
+        } else {
+            const addFavor =
+                /*html*/
+                `<button type="button" class="favorite-btn btn-lg btn-block" id="addFavorite">Add Favourite</button>`
+            $("#btnFavorite").append(addFavor)
+        }
+        addmovieFavorite(doc.data())
 
 
-    // }).catch(function (error) {
-    //     console.log("Error getting cached document:", error);
-    // });
+    }).catch(function (error) {
+        console.log("Error getting cached document:", error);
+    });
 }
 
 function getmoviefromSearch() {
@@ -149,7 +150,32 @@ function getmoviefromSearch() {
 
 function getmovieCategory(){
     $("ons-carousel-item button").click(function(){
-        console.log($(this).attr('id'));
+        $("#searchItem").empty();
+        const targetCategory = $(this).attr('id') 
+        db.collection("movies").get().then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                const category = doc.data().category
+                if (category.indexOf(targetCategory) != -1) {
+                    const result =
+                        /*html*/
+                        `<div id="${doc.data().id}" class="imgfav d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
+                        <div class="movietextbg">
+                            <div class="movietitle">${doc.data().title}</div>
+                        </div>
+                    </div>`
+                    $("#searchItem").append(result);
+                }
+            });
+            $("#searchItem div").click(function(){
+                const movieTarget =  $(this).attr('id');
+                getmovieDetail(movieTarget);
+                document.querySelector("#Navigator_search").pushPage("views/movieDetail.html");
+                document.querySelector('ons-back-button').onclick = function(){
+                    document.querySelector('#Navigator_search').popPage();
+                }
+                
+            });
+        });
     })
 }
 
