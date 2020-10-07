@@ -21,7 +21,8 @@ $(function () {
     document.addEventListener('init', function (event) {
         var page = event.target;
         if (page.id === "Home") {
-
+            getmovieRecommend();
+            getmovie()
         } else if (page.id === "Search") {
             getmovieCategory();
         } else if (page.id === "Favorite") {
@@ -72,8 +73,48 @@ function checkUserLogin() {
     });
 }
 
+function getmovieRecommend() {
+    // db.collection("movies").where("rating", ">=", 9).orderBy("rating")
+    //     .get()
+    //     .then(function (querySnapshot) {
+    //         querySnapshot.forEach(function (doc) {
+    //             console.log(doc.data());
+    //         });
+    //     })
+    //     .catch(function (error) {
+    //         console.log("Error getting documents: ", error);
+    //     });
+}
+
+function getmovie() {
+    // var action = 0;
+    // var adventure = 0;
+    // var comedy = 0;
+    // var horror = 0;
+    // db.collection("movies").get().then(function (querySnapshot) {
+    //     querySnapshot.forEach(function (doc) {
+    //         if (doc.data().category[0] == "Action") {
+    //             console.log("Action " + doc.data().title);
+    //             action++;
+    //         } else if (doc.data().category[0] == "Adventure") {
+    //             console.log("Adventure " + doc.data().title);
+    //             adventure++
+    //         } else if (doc.data().category[0] == "Fantasy") {
+    //             console.log("Fantasy " + doc.data().title);
+    //             comedy++
+    //         } else if (doc.data().category[0] == "Horror") {
+    //             console.log("Horror " + doc.data().title);
+    //             horror++
+    //         }
+    //     });
+    //     console.log("count of Action " + action);
+    //     console.log("count of Adventure " + adventure);
+    //     console.log("count of Comedy " + comedy);
+    //     console.log("count of Horror " + horror);
+    // });
+}
+
 function getmovieDetail(Target) {
-    console.log(Target);
     $("#MovieDetail").empty();
     db.collection("movies").doc(Target).get().then(function (doc) {
         const result =
@@ -87,7 +128,8 @@ function getmovieDetail(Target) {
 
                 </div>
                 <div class="area-btn">
-                    <button type="button" class="trailer-btn btn-lg btn-block">Watch Trailer</button>
+                    <button type="button" id="btnTrailer" class="trailer-btn btn-lg btn-block">Watch Trailer</button>
+                    <div id="showTrailer"></div>
                 </div>
                 <div class="area-btn">
                     <button type="button" class="play-btn btn-lg btn-block">PLAY</button>
@@ -97,7 +139,16 @@ function getmovieDetail(Target) {
                 </div>
             </div>`
         $("#showMovieDetail").append(result)
-        // <iframe width = "100%" height = "50%" src = "https://www.youtube.com/embed/" allowfullscreen ></iframe >
+
+        $("#btnTrailer").click(function () {
+            $("#showTrailer").empty();
+            const TrailerMovie =
+                /*html*/
+                `<iframe width="100%" height="100%" src ="https://www.youtube.com/embed/${doc.data().trailerURL}" allowfullscreen></iframe>`
+            $("#showTrailer").append(TrailerMovie)
+        })
+
+
         const getCategory = doc.data().category;
         for (var i = 0; i < getCategory.length; i++) {
             const Category =
@@ -257,7 +308,6 @@ function ChangePassword() {
     $("#confirmPassword").click(function () {
         const newPass = document.getElementById('newpassword').value
         const conPass = document.getElementById('confirmpassword').value
-
         if (newPass == conPass) {
             var user = firebase.auth().currentUser;
             user.updatePassword(conPass).then(function () {
