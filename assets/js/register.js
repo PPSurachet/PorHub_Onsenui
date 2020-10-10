@@ -45,11 +45,6 @@ $(function () {
         })
     });
 
-    
-
-    
-
-
     $("#signUp").click(function () {
         const email = $("#email").val();
         const password = $("#password").val();

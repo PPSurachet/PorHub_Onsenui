@@ -15,14 +15,12 @@ firebase.analytics();
 var db = firebase.firestore();
 
 $(function () {
-
     checkUserLogin();
-
     document.addEventListener('init', function (event) {
         var page = event.target;
         if (page.id === "Home") {
             getmovieRecommend();
-            getmovie()
+            getmovie();
         } else if (page.id === "Search") {
             getmovieCategory();
         } else if (page.id === "Favorite") {
@@ -43,7 +41,6 @@ $(function () {
             editProfile(user)
         }
     });
-
 });
 
 function checkUserLogin() {
@@ -74,44 +71,57 @@ function checkUserLogin() {
 }
 
 function getmovieRecommend() {
-    // db.collection("movies").where("rating", ">=", 9).orderBy("rating")
-    //     .get()
-    //     .then(function (querySnapshot) {
-    //         querySnapshot.forEach(function (doc) {
-    //             console.log(doc.data());
-    //         });
-    //     })
-    //     .catch(function (error) {
-    //         console.log("Error getting documents: ", error);
-    //     });
+    db.collection("movies").where("rating", ">=", 9).orderBy("rating")
+        .get()
+        .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+                const Result =
+                    /*html*/
+                    `<div class="area-imgMovie">
+                        <ons-carousel-item id="${doc.data().id}">
+                            <img src="${doc.data().posterURL}" class="imgMovie" width="100%" alt="" srcset="">
+                        </ons-carousel-item>
+                    </div>`
+                $("#carousel-recommend").append(Result);
+            });
+        })
+        .catch(function (error) {
+            console.log("Error getting documents: ", error);
+        });
 }
 
 function getmovie() {
-    // var action = 0;
-    // var adventure = 0;
-    // var comedy = 0;
-    // var horror = 0;
-    // db.collection("movies").get().then(function (querySnapshot) {
-    //     querySnapshot.forEach(function (doc) {
-    //         if (doc.data().category[0] == "Action") {
-    //             console.log("Action " + doc.data().title);
-    //             action++;
-    //         } else if (doc.data().category[0] == "Adventure") {
-    //             console.log("Adventure " + doc.data().title);
-    //             adventure++
-    //         } else if (doc.data().category[0] == "Fantasy") {
-    //             console.log("Fantasy " + doc.data().title);
-    //             comedy++
-    //         } else if (doc.data().category[0] == "Horror") {
-    //             console.log("Horror " + doc.data().title);
-    //             horror++
-    //         }
-    //     });
-    //     console.log("count of Action " + action);
-    //     console.log("count of Adventure " + adventure);
-    //     console.log("count of Comedy " + comedy);
-    //     console.log("count of Horror " + horror);
-    // });
+    db.collection("movies").get().then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+            const Result =
+                /*html*/
+                `<div class="area-imgMovie">
+                    <ons-carousel-item id="${doc.data().id}">
+                        <img src="${doc.data().posterURL}" class="imgMovie" width="100%" alt="" srcset="">
+                    </ons-carousel-item>
+                </div>`
+            if (doc.data().category[0] == "Action") {
+                $("#carousel-action").append(Result);
+
+            } else if (doc.data().category[0] == "Adventure") {
+                $("#carousel-adventure").append(Result);
+
+            } else if (doc.data().category[0] == "Fantasy") {
+                $("#carousel-fantasy").append(Result);
+
+            } else if (doc.data().category[0] == "Comedy") {
+                $("#carousel-comedy").append(Result);
+
+            } else if (doc.data().category[0] == "Horror") {
+                $("#carousel-horror").append(Result);
+            }
+        });
+        $(".area-imgMovie ons-carousel-item").click(function () {
+            const movieTarget = $(this).attr('id');
+            getmovieDetail(movieTarget);
+            document.querySelector("#Navigator_home").pushPage("views/movieDetail.html");
+        });
+    });
 }
 
 function getmovieDetail(Target) {
@@ -147,7 +157,6 @@ function getmovieDetail(Target) {
                 `<iframe width="100%" height="100%" src ="https://www.youtube.com/embed/${doc.data().trailerURL}" allowfullscreen></iframe>`
             $("#showTrailer").append(TrailerMovie)
         })
-
 
         const getCategory = doc.data().category;
         for (var i = 0; i < getCategory.length; i++) {
@@ -232,7 +241,6 @@ function getmovieCategory() {
 
 function addmovieFavorite(data) {
     $("#btnFavorite button").click(function () {
-        console.log($(this).attr('id'));
         var user = firebase.auth().currentUser;
         if (this.id == "addFavorite") {
             $(this).html("Remove Favorite")
@@ -265,14 +273,20 @@ function getmovieFavourite() {
             if (getUserFavorite.indexOf(user.uid) != -1) {
                 const result =
                     /*html*/
-                    `<div div class="imgfav d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
-                    <div class="movietextbg">
-                        <div class="movietitle">${doc.data().title}</div>
-                    </div>
-                </div>`
+                    `<div id="${doc.data().id}" class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); " >
+                        <div class="movietextbg">
+                            <div class="movietitle">${doc.data().title}</div>
+                        </div>
+                    </div>`
                 $("#showmovieFavorite").append(result)
             }
         });
+        $("#showmovieFavorite div").click(function () {
+            const movieTarget = $(this).attr('id');
+            console.log(movieTarget);
+            getmovieDetail(movieTarget);
+            document.querySelector("#Navigator_favorite").pushPage("views/movieDetail.html");
+        })
     });
 }
 

@@ -100,6 +100,12 @@
     margin-top: 1rem;
     color: white;
 }
+
+.area-imgDetail img{
+    border: 5px solid #efeff4;
+}
+
+
 .tagbut{
     border-radius: 30px;
     width: 100px;
@@ -112,5 +118,4 @@
 .marginAddon{
     margin-left: 0;
     margin-right: 0;
-    
 }

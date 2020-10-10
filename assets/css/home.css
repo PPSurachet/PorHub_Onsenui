@@ -1,0 +1,35 @@
+#Home ons-row {
+    margin-left: 1rem;
+}
+
+.titleMovie{
+    font-weight: bold;
+    font-size: 28px;
+    margin-left: 0.5rem;
+    color: black;
+}
+
+.titleMovie-darkmode{
+    font-weight: bold;
+    font-size: 28px;
+    margin-left: 0.5rem;
+    color: white;
+}
+
+.area-titleMovie{
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.area-imgMovie{
+    padding-left: 0.3rem;
+    padding-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 160px;
+}
+
+.imgMovie{
+    border-radius: 10px;
+    margin-top: 1rem;
+}

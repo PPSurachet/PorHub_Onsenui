@@ -9,12 +9,13 @@ $(function () {
                 $('svg').toggleClass('svg-darkmode');
                 $('.Profile').toggleClass('Profile-darkmode')
                 $('.searchbar').toggleClass('searchbar-darkmode')
+                $('.titleMovie').toggleClass('titleMovie-darkmode')
             });
-        } else if (page.id == "editProfile" || page.id == "changePicture") {
+        } else if (page.id == "editProfile" || page.id == "changePass" || page.id == "movieDetail") {
             if (document.querySelector("#my-switch").checked) {
                 $('#changePass .page__background').css("background-color", "#2F2F2F");
                 $('#editProfile .page__background').css("background-color", "#2F2F2F");
-                $('#changePicture .page__background').css("background-color", "#2F2F2F");
+                $('#movieDetail .page__background').css("background-color", "#2F2F2F");
                 $('.titleOP', 'body').css("color", "white");
                 $('svg').css("fill", "white");
                 $('.btn-lightmode').css("background-color", "#FA043F");

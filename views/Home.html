@@ -1,9 +1,50 @@
 <ons-page id="HomePage">
     <ons-navigator swipeable id="Navigator_home" page="Home.html"></ons-navigator>
     <template id="Home.html">
-        <ons-page id="Home" class="margin-start Cairo">
-            <div id="MovieDetail"></div>
-            <div id="trailer"></div>
+        <ons-page id="Home" class="margin-start Prompt">
+
+            <ons-row class="area-titleMovie">
+                <img src="/assets/image/icon-recommend.png" width="45px" alt="" srcset="">
+                <div class="titleMovie">Recommanded</div>
+            </ons-row>
+            <ons-carousel item-width="160px" swipeable auto-scroll overscrollable id="carousel-recommend">
+            </ons-carousel>
+
+            <ons-row class="area-titleMovie">
+                <img src="/assets/image/icon-action.png" width="45px" alt="" srcset="">
+                <div class="titleMovie">Action</div>
+            </ons-row>
+            <ons-carousel item-width="160px" swipeable auto-scroll overscrollable id="carousel-action">
+            </ons-carousel>
+
+            <ons-row class="area-titleMovie">
+                <img src="/assets/image/icon-adventure.png" width="45px" alt="" srcset="">
+                <div class="titleMovie">Adventure</div>
+            </ons-row>
+            <ons-carousel item-width="160px" swipeable auto-scroll overscrollable id="carousel-adventure">
+            </ons-carousel>
+
+            <ons-row class="area-titleMovie">
+                <img src="/assets/image/icon-fantasy.png" width="45px" alt="" srcset="">
+                <div class="titleMovie">Fantasy</div>
+            </ons-row>
+            <ons-carousel item-width="160px" swipeable auto-scroll overscrollable id="carousel-fantasy">
+            </ons-carousel>
+
+            <ons-row class="area-titleMovie">
+                <img src="/assets/image/icon-comedy.png" width="45px" alt="" srcset="">
+                <div class="titleMovie">Comedy</div>
+            </ons-row>
+            <ons-carousel item-width="160px" swipeable auto-scroll overscrollable id="carousel-comedy">
+            </ons-carousel>
+
+            <ons-row class="area-titleMovie">
+                <img src="/assets/image/icon-horror.png" width="45px" alt="" srcset="">
+                <div class="titleMovie">Horror</div>
+            </ons-row>
+            <ons-carousel item-width="160px" swipeable auto-scroll overscrollable id="carousel-horror">
+            </ons-carousel>
+
         </ons-page>
     </template>
 </ons-page>
