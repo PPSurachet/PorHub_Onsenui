@@ -1,20 +1,4 @@
 $(function () {
-    var firebaseConfig = {
-        apiKey: "AIzaSyBbJnVvL1YjxtX17Rk7tqBukUGMObT4zAg",
-        authDomain: "porhub-bf02f.firebaseapp.com",
-        databaseURL: "https://porhub-bf02f.firebaseio.com",
-        projectId: "porhub-bf02f",
-        storageBucket: "porhub-bf02f.appspot.com",
-        messagingSenderId: "580268459147",
-        appId: "1:580268459147:web:613c1bfc8883bc4bd4808e",
-        measurementId: "G-VC5M761WHZ"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    firebase.analytics();
-
-    var db = firebase.firestore();
-
     $("#signIn").click(function () {
         const email = $("#email").val();
         const password = $("#password").val();
@@ -24,12 +8,6 @@ $(function () {
             var errorMessage = error.message;
             ons.notification.alert(errorMessage);
         });
-        firebase.auth().onAuthStateChanged(function (user) {
-            if (user) {
-                window.location.href = "index.html"
-            }
-        });
-
     })
 
     $("#showPassword").click(function () {
@@ -44,8 +22,31 @@ $(function () {
         }
     })
 
-    // $("#signInWithGoogle").click(function () {
-    //     var provider = new firebase.auth.GoogleAuthProvider();
-    //     firebase.auth().signInWithRedirect(provider);
-    // })
+    $("#signInWithGoogle").click(function () {
+        var provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithRedirect(provider);
+        firebase.auth().getRedirectResult().then(function (result) {
+            if (result.credential) {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = result.credential.accessToken;
+                // ...
+            }
+            // The signed-in user info.
+            var user = result.user;
+        }).catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // The email of the user's account used.
+            var email = error.email;
+            // The firebase.auth.AuthCredential type that was used.
+            var credential = error.credential;
+            // ...
+        });
+    })
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            window.location.href = "index.html"
+        }
+    });
 });

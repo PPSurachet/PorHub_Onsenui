@@ -1,17 +1,3 @@
-var firebaseConfig = {
-    apiKey: "AIzaSyBbJnVvL1YjxtX17Rk7tqBukUGMObT4zAg",
-    authDomain: "porhub-bf02f.firebaseapp.com",
-    databaseURL: "https://porhub-bf02f.firebaseio.com",
-    projectId: "porhub-bf02f",
-    storageBucket: "porhub-bf02f.appspot.com",
-    messagingSenderId: "580268459147",
-    appId: "1:580268459147:web:613c1bfc8883bc4bd4808e",
-    measurementId: "G-VC5M761WHZ"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-firebase.analytics();
-
 var db = firebase.firestore();
 
 $(function () {
@@ -196,9 +182,11 @@ function getmoviefromSearch() {
             if (newtitlemovie.toLowerCase().indexOf(newsearchText.toLowerCase()) != -1) {
                 const Result =
                     /*html*/
-                    `<div id="${doc.data().id}" class="imgfav d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
-                        <div class="movietextbg">
-                            <div class="movietitle">${doc.data().title}</div>
+                    `<div id="${doc.data().id}" class="imgfav" style = "background-image: url(${doc.data().posterURL}); " >
+                        <div class="d-flex align-items-end">
+                            <div class="movietextbg">
+                                <div class="movietitle">${doc.data().title}</div>
+                            </div>
                         </div>
                     </div >`
                 $("#searchItem").append(Result);
@@ -219,14 +207,14 @@ function getmovieCategory() {
         db.collection("movies").get().then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
                 const category = doc.data().category
-                if (category.indexOf(targetCategory) != -1) {
+                if (category.includes(targetCategory)) {
                     const result =
                         /*html*/
                         `<div id="${doc.data().id}" class="imgfav d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
-                        <div class="movietextbg">
-                            <div class="movietitle">${doc.data().title}</div>
-                        </div>
-                    </div>`
+                            <div class="movietextbg">
+                                <div class="movietitle">${doc.data().title}</div>
+                            </div>
+                        </div>`
                     $("#searchItem").append(result);
                 }
             });
