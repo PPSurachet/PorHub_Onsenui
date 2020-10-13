@@ -128,7 +128,8 @@ function getmovieDetail(Target) {
                     <div id="showTrailer"></div>
                 </div>
                 <div class="area-btn">
-                    <button type="button" class="play-btn btn-lg btn-block">PLAY</button>
+                    <button type="button" id="btnPlay" class="play-btn btn-lg btn-block">PLAY</button>
+                    <div id="showVideo"></div>
                 </div>
                 <div class="review-text">
                     ${doc.data().review}
@@ -136,12 +137,27 @@ function getmovieDetail(Target) {
             </div>`
         $("#showMovieDetail").append(result)
 
+        const TrailerMovie =
+            /*html*/
+            `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${doc.data().trailerURL}" allowfullscreen></iframe>`
+        $("#showTrailer").append(TrailerMovie)
+        $("#showTrailer").hide();
+
         $("#btnTrailer").click(function () {
-            $("#showTrailer").empty();
-            const TrailerMovie =
+            $("#showTrailer").toggle();
+        })
+
+        $("#btnPlay").click(function () {
+            const videoURL =
                 /*html*/
-                `<iframe width="100%" height="100%" src ="https://www.youtube.com/embed/${doc.data().trailerURL}" allowfullscreen></iframe>`
-            $("#showTrailer").append(TrailerMovie)
+                `<video id="my-video" class="video-js" controls preload="auto" autoplay preload="auto"
+                data-setup="{}">
+                <source src="${doc.data().videoURL}" type="video/mp4" />
+            </video>`
+            $("#showVideo").append(videoURL)
+
+            var docElm = document.getElementById('my-video')
+            docElm.requestFullscreen();
         })
 
         const getCategory = doc.data().category;
@@ -182,13 +198,11 @@ function getmoviefromSearch() {
             if (newtitlemovie.toLowerCase().indexOf(newsearchText.toLowerCase()) != -1) {
                 const Result =
                     /*html*/
-                    `<div id="${doc.data().id}" class="imgfav" style = "background-image: url(${doc.data().posterURL}); " >
-                        <div class="d-flex align-items-end">
-                            <div class="movietextbg">
-                                <div class="movietitle">${doc.data().title}</div>
-                            </div>
+                    `<div id="${doc.data().id}" class="imgfav d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
+                        <div class="movietextbg">
+                            <div class="movietitle">${doc.data().title}</div>
                         </div>
-                    </div >`
+                    </div>`
                 $("#searchItem").append(Result);
             }
         });
