@@ -4,7 +4,7 @@
 
 .titleMovie{
     font-weight: bold;
-    font-size: 28px;
+    font-size: 25px;
     margin-left: 0.5rem;
     color: black;
 }
@@ -35,14 +35,14 @@
 }
 
 .area-imgDetail{
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     margin-bottom: 1rem;
     text-align: center;
 }
 
 .imgDetail{
     border-radius: 15px;
-    width: 70%;
+    width: 65%;
 }
 
 .area-categoryDetail{
@@ -77,7 +77,7 @@
 .favorite-btn{
     border-radius: 15px;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 20px;
     background-color: #E7184A;
     color: white;
 }
@@ -85,7 +85,7 @@
 .trailer-btn{
     border-radius: 15px;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 20px;
     background-color: #F8F8F8;
     color: #160101;
 }
@@ -93,7 +93,7 @@
 .play-btn{
     border-radius: 15px;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 20px;
     background-color: #1E73F1;
     color: white;
 }

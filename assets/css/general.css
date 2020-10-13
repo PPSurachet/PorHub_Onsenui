@@ -95,3 +95,7 @@ svg{
     height: 200px;
 }
 
+.back-button--material{
+    margin: 0;
+    height: 30px;
+}

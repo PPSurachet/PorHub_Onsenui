@@ -1,4 +1,13 @@
-.imgfav{
+.movietitle-Fav{
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    color: rgb(0, 0, 0);
+    padding-left: 0.11rem;
+    padding-right: 0.1rem;
+}
+
+.imgFav{
   border: 0;
   height: 250px;
   width: 11rem;

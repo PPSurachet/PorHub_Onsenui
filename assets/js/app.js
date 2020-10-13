@@ -148,6 +148,7 @@ function getmovieDetail(Target) {
         })
 
         $("#btnPlay").click(function () {
+            $("#showVideo").empty();
             const videoURL =
                 /*html*/
                 `<video id="my-video" class="video-js" controls preload="auto" autoplay preload="auto"
@@ -157,6 +158,7 @@ function getmovieDetail(Target) {
             $("#showVideo").append(videoURL)
 
             var docElm = document.getElementById('my-video')
+            // $("#my-video").requestFullscreen();
             docElm.requestFullscreen();
         })
 
@@ -198,9 +200,9 @@ function getmoviefromSearch() {
             if (newtitlemovie.toLowerCase().indexOf(newsearchText.toLowerCase()) != -1) {
                 const Result =
                     /*html*/
-                    `<div id="${doc.data().id}" class="imgfav d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
+                    `<div id="${doc.data().id}" class="imgSrc d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
                         <div class="movietextbg">
-                            <div class="movietitle">${doc.data().title}</div>
+                            <div class="movietitle-Src">${doc.data().title}</div>
                         </div>
                     </div>`
                 $("#searchItem").append(Result);
@@ -224,9 +226,9 @@ function getmovieCategory() {
                 if (category.includes(targetCategory)) {
                     const result =
                         /*html*/
-                        `<div id="${doc.data().id}" class="imgfav d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
+                        `<div id="${doc.data().id}" class="imgSrc d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
                             <div class="movietextbg">
-                                <div class="movietitle">${doc.data().title}</div>
+                                <div class="movietitle-Src">${doc.data().title}</div>
                             </div>
                         </div>`
                     $("#searchItem").append(result);
@@ -275,9 +277,9 @@ function getmovieFavourite() {
             if (getUserFavorite.indexOf(user.uid) != -1) {
                 const result =
                     /*html*/
-                    `<div id="${doc.data().id}" class="imgfav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); " >
+                    `<div id="${doc.data().id}" class="imgFav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); " >
                         <div class="movietextbg">
-                            <div class="movietitle">${doc.data().title}</div>
+                            <div class="movietitle-Fav">${doc.data().title}</div>
                         </div>
                     </div>`
                 $("#showmovieFavorite").append(result)
