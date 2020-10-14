@@ -19,7 +19,7 @@ ons-toolbar .center{
 }
 ons-toolbar .center span{
     margin-left: 5px;
-    padding: 3px;
+    padding: 1px 3px 1px 3px;
     border-radius: 15px;
     background-color: #f90;
     color: black;
@@ -92,4 +92,40 @@ svg{
 .back-button--material{
     margin: 0;
     height: 30px;
+}
+
+.bg-index{
+    background-image: url('/assets/image/Background-Index.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+.bg-index .text-center .Prompt{
+    margin-top: 6rem;
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+}
+
+.logo-Totoro img{
+    margin-top: 3rem;
+}
+
+.logo-PorHub img{
+    margin-top: 3rem;
+}
+
+.btn-Getstarted{
+    margin-top: 4rem;
+    padding-top: 0.5rem;
+    background-color: #f90;
+    color: black;
+    width: 150px;
+    height: 60px;
+    font-size: 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    border: 2.5px solid black;
+
 }
