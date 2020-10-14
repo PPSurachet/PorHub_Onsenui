@@ -35,10 +35,14 @@
         <div class="logo-PorHub">
             <img src="/assets/image/icon-logo.png" alt="" srcset="">
         </div>
-        <a type="button" href="PorHub.html" class="btn-Getstarted Cairo">Get Started</a>
+        <button type="button" id="getLink" class="btn-Getstarted Cairo">Get Started</button>
     </div>
 </body>
-
+<script>
+    document.getElementById('getLink').onclick = function () {
+        window.location.href = 'PorHub.html'
+    }
+</script>
 <!-- service-worker -->
 <script>
     if ('serviceWorker' in navigator) {

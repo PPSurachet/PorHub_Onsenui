@@ -98,7 +98,7 @@ svg{
     background-image: url('/assets/image/Background-Index.png');
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100%;
+    background-color: #BA0F0F;
 }
 
 .bg-index .text-center .Prompt{
@@ -118,7 +118,6 @@ svg{
 
 .btn-Getstarted{
     margin-top: 4rem;
-    padding-top: 0.5rem;
     background-color: #f90;
     color: black;
     width: 150px;
