@@ -190,19 +190,21 @@ function getmovieDetail(Target) {
 }
 
 function getmoviefromSearch() {
-    const searchText = document.getElementById('searchResult').value
+    const searchText = $("#searchResult").val()
     const newsearchText = searchText.replace(/ /g, "");
     $("#searchItem").empty();
     db.collection("movies").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             const titlemovie = doc.data().title;
-            const newtitlemovie = titlemovie.replace(/ /g, "");
-            if (newtitlemovie.toLowerCase().indexOf(newsearchText.toLowerCase()) != -1) {
+            const newtitleMovie = titlemovie.replace(/ /g, "");
+            if (newtitleMovie.toLowerCase().indexOf(newsearchText.toLowerCase()) != -1) {
                 const Result =
                     /*html*/
-                    `<div id="${doc.data().id}" class="imgSrc d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
-                        <div class="movietextbg">
-                            <div class="movietitle-Src">${doc.data().title}</div>
+                    `<div class="col-4" style="padding-left:0px;padding-right:0px">
+                        <div id="${doc.data().id}" class="imgSrc d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
+                            <div class="movietextbg">
+                                <div class="movietitle-Src">${doc.data().title}</div>
+                            </div>
                         </div>
                     </div>`
                 $("#searchItem").append(Result);
@@ -218,6 +220,7 @@ function getmoviefromSearch() {
 
 function getmovieCategory() {
     $("ons-carousel-item button").click(function () {
+        $("#searchResult").val("")
         $("#searchItem").empty();
         const targetCategory = $(this).attr('id')
         db.collection("movies").get().then(function (querySnapshot) {
@@ -226,9 +229,11 @@ function getmovieCategory() {
                 if (category.includes(targetCategory)) {
                     const result =
                         /*html*/
-                        `<div id="${doc.data().id}" class="imgSrc d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
-                            <div class="movietextbg">
-                                <div class="movietitle-Src">${doc.data().title}</div>
+                        `<div class="col-4" style="padding-left:0px;padding-right:0px">
+                            <div id="${doc.data().id}" class="imgSrc d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
+                                <div class="movietextbg">
+                                    <div class="movietitle-Src">${doc.data().title}</div>
+                                </div>
                             </div>
                         </div>`
                     $("#searchItem").append(result);
