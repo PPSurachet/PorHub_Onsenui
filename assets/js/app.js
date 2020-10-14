@@ -282,9 +282,11 @@ function getmovieFavourite() {
             if (getUserFavorite.indexOf(user.uid) != -1) {
                 const result =
                     /*html*/
-                    `<div id="${doc.data().id}" class="imgFav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); " >
-                        <div class="movietextbg">
-                            <div class="movietitle-Fav">${doc.data().title}</div>
+                    `<div class="col-6" style="padding-left:0px;padding-right:0px">
+                        <div id="${doc.data().id}" class="imgFav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); " >
+                            <div class="movietextbg">
+                                <div class="movietitle-Fav">${doc.data().title}</div>
+                            </div>
                         </div>
                     </div>`
                 $("#showmovieFavorite").append(result)

@@ -43,7 +43,7 @@ ons-toolbar .center img{
 .area-margin{
     display: flex;
     align-items: center;
-    padding-top: 1.5rem;
+    padding-top: 1rem;
 }
 .page__background-darkmode  {
     background-color: #2F2F2F;
