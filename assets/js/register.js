@@ -1,11 +1,11 @@
 $(function () {
     var db = firebase.firestore();
 
-    // firebase.auth().onAuthStateChanged(function (user) {
-    //     if (user) {
-    //         window.location.href = "index.html"
-    //     }
-    // });
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            window.location.href = "PorHub.html"
+        }
+    });
 
     var imgtarget;
 
@@ -53,7 +53,7 @@ $(function () {
                     photoURL: imgtarget
                 }).then(function () {
                     // Update successful.
-                    window.location.href = "index.html"
+                    window.location.href = "PorHub.html"
                 }).catch(function (error) {
                     // An error happened.
                 });

@@ -9,27 +9,22 @@
 }
 .toolbar{
     background-color: #BA0F0F;
-    height: 60px;
-}
-.tabbar--top{
-    margin-top: 1rem;
 }
 ons-toolbar .center{
     text-align: center;
-    padding-top: 0.55rem;
     background-color: #BA0F0F;
     color: white;
     font-weight: bold;
-    font-size: 35px;
+    font-size: 30px;
 }
 ons-toolbar .center span{
     margin-left: 5px;
-    padding:5px 5px 5px 5px;
+    padding: 3px;
     border-radius: 15px;
     background-color: #f90;
     color: black;
     font-weight: bold;
-    font-size: 35px;
+    font-size: 30px;
 }
 ons-toolbar .center circle{
     background-color: white;
@@ -43,7 +38,7 @@ ons-toolbar .center img{
     margin-bottom: 0.5rem;
 }   
 .margin-start{
-    margin-top: 0.5rem;
+    margin-top: 0;
 }
 .area-margin{
     display: flex;
