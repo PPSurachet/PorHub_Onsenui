@@ -19,7 +19,7 @@ ons-toolbar .center{
 }
 ons-toolbar .center span{
     margin-left: 5px;
-    padding: 1px 3px 1px 3px;
+    padding: 2.5px 6px 2.5px 6px;
     border-radius: 15px;
     background-color: #f90;
     color: black;
@@ -65,7 +65,7 @@ ons-toolbar .center img{
 }
 .titlebar{
     font-weight: bold;
-    font-size: 30px;
+    font-size: 25px;
     margin-left: 1rem;
 }
 svg{
@@ -120,7 +120,7 @@ svg{
     margin-top: 4rem;
     background-color: #f90;
     color: black;
-    width: 150px;
+    width: 170px;
     height: 60px;
     font-size: 25px;
     border-radius: 10px;
