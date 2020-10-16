@@ -102,8 +102,29 @@
     text-align: justify;
     margin-left: 1.8rem;
     margin-right: 1.8rem;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     color: white;
+}
+
+.title-text{
+    text-align: center;
+    margin-left: 1.8rem;
+    margin-right: 1.8rem;
+    margin-top: 1rem;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+}
+
+.rating-text{
+    border-radius: 15px;
+    background-color: black;
+    color: #f90;
+    padding: 0rem 0.5rem 0rem 0.5rem;
+    margin-left: 0.2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    font-size: 24px;
 }
 
 .area-imgDetail img{

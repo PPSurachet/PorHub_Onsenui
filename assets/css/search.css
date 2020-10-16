@@ -18,14 +18,14 @@
 }
 
 .searchbar{
-    color: rgb(0, 0, 0);
-    margin-top: 0.5rem;
+    color: black;
+    margin-top: 0.2rem;
     padding-left: 1.5rem;
 }
 
 .searchbar-darkmode{
-    color: rgb(255, 255, 255);
-    margin-top: 1rem;
+    color: white;
+    margin-top: 0.2rem;
     padding-left: 2rem;
 }
 

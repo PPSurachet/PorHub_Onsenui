@@ -131,7 +131,10 @@ function getmovieDetail(Target) {
                     <button type="button" id="btnPlay" class="play-btn btn-lg btn-block">PLAY</button>
                     <div id="showVideo"></div>
                 </div>
-                <div class="review-text">
+                <div class="title-text Prompt">
+                    ${doc.data().title} ${doc.data().year}
+                </div>
+                <div class="review-text Prompt">
                     ${doc.data().review}
                 </div>
             </div>`
@@ -169,6 +172,13 @@ function getmovieDetail(Target) {
                 `<div class="categoryDetail">${getCategory[i]}</div>`
             $("#CategoryMovie").append(Category)
         }
+
+        const ratingResult =
+            /*html*/
+            `<div class="rating-text Prompt">
+                <ons-icon size="24px" icon="md-star"></ons-icon> ${doc.data().rating}
+            </div>`
+        $("#CategoryMovie").append(ratingResult)
 
         var user = firebase.auth().currentUser;
         if (doc.data().uid.indexOf(user.uid) != -1) {
@@ -210,7 +220,7 @@ function getmoviefromSearch() {
                 $("#searchItem").append(Result);
             }
         });
-        $("#searchItem div").click(function () {
+        $("#searchItem div .imgSrc").click(function () {
             const movieTarget = $(this).attr('id');
             getmovieDetail(movieTarget);
             document.querySelector("#Navigator_search").pushPage("views/movieDetail.html");
@@ -239,7 +249,7 @@ function getmovieCategory() {
                     $("#searchItem").append(result);
                 }
             });
-            $("#searchItem div").click(function () {
+            $("#searchItem div .imgSrc").click(function () {
                 const movieTarget = $(this).attr('id');
                 getmovieDetail(movieTarget);
                 document.querySelector("#Navigator_search").pushPage("views/movieDetail.html");
@@ -257,7 +267,6 @@ function addmovieFavorite(data) {
             db.collection("movies").doc(data.id).update({
                 uid: firebase.firestore.FieldValue.arrayUnion(user.uid)
             }).then(function () {
-                console.log("Document successfully Updated!");
                 getmovieFavourite();
             });
         } else if (this.id == "RemoveFavorite") {
@@ -266,7 +275,6 @@ function addmovieFavorite(data) {
             db.collection("movies").doc(data.id).update({
                 uid: firebase.firestore.FieldValue.arrayRemove(user.uid)
             }).then(function () {
-                console.log("Document successfully Deleted!");
                 getmovieFavourite();
             });
         }
@@ -294,7 +302,6 @@ function getmovieFavourite() {
         });
         $("#showmovieFavorite div").click(function () {
             const movieTarget = $(this).attr('id');
-            console.log(movieTarget);
             getmovieDetail(movieTarget);
             document.querySelector("#Navigator_favorite").pushPage("views/movieDetail.html");
         })
