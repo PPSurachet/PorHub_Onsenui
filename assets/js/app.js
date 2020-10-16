@@ -105,13 +105,13 @@ function getmovie() {
         $(".area-imgMovie ons-carousel-item").click(function () {
             const movieTarget = $(this).attr('id');
             getmovieDetail(movieTarget);
-            document.querySelector("#Navigator_home").pushPage("views/movieDetail.html");
+            document.querySelector("#Navigator").pushPage("views/movieDetail.html");
         });
     });
 }
 
 function getmovieDetail(Target) {
-    $("#MovieDetail").empty();
+    $("#showMovieDetail").empty();
     db.collection("movies").doc(Target).get().then(function (doc) {
         const result =
             /*html*/
@@ -220,10 +220,10 @@ function getmoviefromSearch() {
                 $("#searchItem").append(Result);
             }
         });
-        $("#searchItem div .imgSrc").click(function () {
+        $(".imgSrc").click(function () {
             const movieTarget = $(this).attr('id');
             getmovieDetail(movieTarget);
-            document.querySelector("#Navigator_search").pushPage("views/movieDetail.html");
+            document.querySelector("#Navigator").pushPage("views/movieDetail.html");
         });
     });
 }
@@ -249,10 +249,10 @@ function getmovieCategory() {
                     $("#searchItem").append(result);
                 }
             });
-            $("#searchItem div .imgSrc").click(function () {
+            $(".imgSrc").click(function () {
                 const movieTarget = $(this).attr('id');
                 getmovieDetail(movieTarget);
-                document.querySelector("#Navigator_search").pushPage("views/movieDetail.html");
+                document.querySelector("#Navigator").pushPage("views/movieDetail.html");
             });
         });
     })
@@ -282,7 +282,9 @@ function addmovieFavorite(data) {
 }
 
 function getmovieFavourite() {
+    $("#noFavortie").empty();
     $("#showmovieFavorite").empty();
+    var countFav = 0;
     db.collection("movies").get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
             var user = firebase.auth().currentUser;
@@ -298,12 +300,19 @@ function getmovieFavourite() {
                         </div>
                     </div>`
                 $("#showmovieFavorite").append(result)
+                countFav++
             }
         });
-        $("#showmovieFavorite div").click(function () {
+        if (countFav < 1) {
+            const result =
+                /*html*/
+                `<div class="noFav">No Favorite Movie Now</div>`
+            $("#noFavortie").append(result)
+        }
+        $(".imgFav").click(function () {
             const movieTarget = $(this).attr('id');
             getmovieDetail(movieTarget);
-            document.querySelector("#Navigator_favorite").pushPage("views/movieDetail.html");
+            document.querySelector("#Navigator").pushPage("views/movieDetail.html");
         })
     });
 }

@@ -15,11 +15,18 @@
   background-size: cover;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 1rem;
   border-radius: 10px;
   border: 4px solid #000;
 }
 
 #showmovieFavorite{
   margin-top: 0.5rem;
+}
+
+.noFav{
+  margin-top: 1rem;
+  text-align: center;
+  color: grey;
+  font-size: 16px;
+  font-weight: bold;
 }
