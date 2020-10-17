@@ -27,6 +27,18 @@ $(function () {
             editProfile(user)
         }
     });
+
+    document.querySelector('ons-tabbar').addEventListener('reactive', function (event) {
+        if (event.index == 0) {
+            document.querySelector('#Navigator_home').popPage();
+        } else if (event.index == 1) {
+            document.querySelector('#Navigator_search').popPage();
+        } else if (event.index == 2) {
+            document.querySelector('#Navigator_favorite').popPage();
+        } else if (event.index == 3) {
+            document.querySelector('#Navigator_option').popPage();
+        }
+    })
 });
 
 function checkUserLogin() {
@@ -115,13 +127,17 @@ function getmovieDetail(Target) {
     db.collection("movies").doc(Target).get().then(function (doc) {
         const result =
             /*html*/
-            `<div class="area-imgDetail">
-                <img src="${doc.data().posterURL}" class="imgDetail" alt="" srcset="">
+            `<div class="img-backgound-detail" style="background-image: url(${doc.data().posterURL});">
+                <div class="area-margin d-flex justify-content-between">
+                    <ons-back-button class="back-button"></ons-back-button>
+                </div>
+                <div class="area-imgDetail">
+                    <img src="${doc.data().posterURL}" class="imgDetail" alt="" srcset="">
+                </div>
             </div>
-            <ons-row class="area-categoryDetail Prompt" id="CategoryMovie"></ons-row>
             <div class="bg-buttonDetail text-center">
+            <ons-row class="area-categoryDetail Prompt" id="CategoryMovie"></ons-row>
                 <div class="area-btn" id="btnFavorite">
-
                 </div>
                 <div class="area-btn">
                     <button type="button" id="btnTrailer" class="trailer-btn btn-lg btn-block">Watch Trailer</button>
@@ -226,11 +242,16 @@ function getmovieDetailSrc(Target) {
     db.collection("movies").doc(Target).get().then(function (doc) {
         const result =
             /*html*/
-            `<div class="area-imgDetail">
-                <img src="${doc.data().posterURL}" class="imgDetail" alt="" srcset="">
+            `<div class="img-backgound-detail" style="background-image: url(${doc.data().posterURL});">
+                <div class="area-margin d-flex justify-content-between">
+                    <ons-back-button class="back-button"></ons-back-button>
+                </div>
+                <div class="area-imgDetail">
+                    <img src="${doc.data().posterURL}" class="imgDetail" alt="" srcset="">
+                </div>
             </div>
-            <ons-row class="area-categoryDetail Prompt" id="CategoryMovieSrc"></ons-row>
             <div class="bg-buttonDetail text-center">
+                <ons-row class="area-categoryDetail Prompt" id="CategoryMovieSrc"></ons-row>
                 <div class="area-btn" id="btnFavoriteSrc">
 
                 </div>
@@ -337,13 +358,17 @@ function getmovieDetailFav(Target) {
     db.collection("movies").doc(Target).get().then(function (doc) {
         const result =
             /*html*/
-            `<div class="area-imgDetail">
-                <img src="${doc.data().posterURL}" class="imgDetail" alt="" srcset="">
+            `<div class="img-backgound-detail" style="background-image: url(${doc.data().posterURL});">
+                <div class="area-margin d-flex justify-content-between">
+                    <ons-back-button class="back-button"></ons-back-button>
+                </div>
+                <div class="area-imgDetail">
+                    <img src="${doc.data().posterURL}" class="imgDetail" alt="" srcset="">
+                </div>
             </div>
-            <ons-row class="area-categoryDetail Prompt" id="CategoryMovieFav"></ons-row>
-            <div class="bg-buttonDetail text-center">
+            <div class="bg-buttonDetail text-center" >
+                <ons-row class="area-categoryDetail Prompt" id="CategoryMovieFav"></ons-row>
                 <div class="area-btn" id="btnFavoriteFav">
-
                 </div>
                 <div class="area-btn">
                     <button type="button" id="btnTrailerFav" class="trailer-btn btn-lg btn-block">Watch Trailer</button>
@@ -364,7 +389,7 @@ function getmovieDetailFav(Target) {
 
         const TrailerMovie =
             /*html*/
-            `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${doc.data().trailerURL}" allowfullscreen></iframe>`
+            `<iframe width = "100%" height = "100%" src = "https://www.youtube.com/embed/${doc.data().trailerURL}" allowfullscreen></ > `
         $("#showTrailerFav").append(TrailerMovie)
         $("#showTrailerFav").hide();
 
@@ -376,9 +401,9 @@ function getmovieDetailFav(Target) {
             $("#showVideoFav").empty();
             const videoURL =
                 /*html*/
-                `<video id="my-video" class="video-js" controls preload="auto" autoplay data-setup="{}">
+                `<video video id = "my-video" class="video-js" controls preload = "auto" autoplay data - setup="{}" >
                     <source src="${doc.data().videoURL}" type="video/mp4" />
-                </video>`
+                </video > `
             $("#showVideoFav").append(videoURL)
 
             var docElm = document.getElementById('my-video')
@@ -390,30 +415,30 @@ function getmovieDetailFav(Target) {
         for (var i = 0; i < getCategory.length; i++) {
             const Category =
                 /*html*/
-                `<div class="categoryDetail">${getCategory[i]}</div>`
+                `<div class="categoryDetail">${getCategory[i]}</div> `
             $("#CategoryMovieFav").append(Category)
         }
 
         const ratingResult =
             /*html*/
             `<div class="rating-text Prompt">
-                <ons-icon size="24px" icon="md-star"></ons-icon> ${doc.data().rating}
-            </div>`
+            <ons-icon size="24px" icon="md-star"></ons-icon> ${doc.data().rating}
+            </div > `
         $("#CategoryMovieFav").append(ratingResult)
 
         var user = firebase.auth().currentUser;
         if (doc.data().uid.indexOf(user.uid) != -1) {
             const RevFavor =
                 /*html*/
-                `<button type="button" class="favorite-btn btn-lg btn-block" id="RemoveFavorite">Remove Favourite</button>`
+                `<button type="button" class="favorite-btn btn-lg btn-block" id ="RemoveFavorite">Remove Favourite</button> `
             $("#btnFavoriteFav").append(RevFavor)
         } else {
             const addFavor =
                 /*html*/
-                `<button type="button" class="favorite-btn btn-lg btn-block" id="addFavorite">Add Favourite</button>`
+                `<button type="button" class="favorite-btn btn-lg btn-block" id ="addFavorite">Add Favourite</button> `
             $("#btnFavoriteFav").append(addFavor)
         }
-        addmovieFavoriteSrc(doc.data())
+        addmovieFavoriteFav(doc.data())
 
     }).catch(function (error) {
         console.log("Error getting cached document:", error);
@@ -454,13 +479,13 @@ function getmoviefromSearch() {
             if (newtitleMovie.toLowerCase().indexOf(newsearchText.toLowerCase()) != -1) {
                 const Result =
                     /*html*/
-                    `<div class="col-4" style="padding-left:0px;padding-right:0px">
-                        <div id="${doc.data().id}" class="imgSrc d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
+                    `<div class="col-4" style = "padding-left:0px;padding-right:0px">
+                        <div id="${doc.data().id}" class="imgSrc d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); " >
                             <div class="movietextbg">
                                 <div class="movietitle-Src">${doc.data().title}</div>
                             </div>
                         </div>
-                    </div>`
+                    </div> `
                 $("#searchItem").append(Result);
             }
         });
@@ -483,13 +508,13 @@ function getmovieCategory() {
                 if (category.includes(targetCategory)) {
                     const result =
                         /*html*/
-                        `<div class="col-4" style="padding-left:0px;padding-right:0px">
-                            <div id="${doc.data().id}" class="imgSrc d-flex align-items-end" style = "background-image: url(${doc.data().posterURL}); " >
-                                <div class="movietextbg">
-                                    <div class="movietitle-Src">${doc.data().title}</div>
-                                </div>
-                            </div>
-                        </div>`
+                        `<div class="col-4" style = "padding-left:0px;padding-right:0px">
+            <div id="${doc.data().id}" class="imgSrc d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); " >
+                <div class="movietextbg">
+                    <div class="movietitle-Src">${doc.data().title}</div>
+                </div>
+            </div>
+                        </ > `
                     $("#searchItem").append(result);
                 }
             });
@@ -513,13 +538,13 @@ function getmovieFavourite() {
             if (getUserFavorite.indexOf(user.uid) != -1) {
                 const result =
                     /*html*/
-                    `<div class="col-6" style="padding-left:0px;padding-right:0px">
+                    `<div class="col-6" style ="padding-left:0px;padding-right:0px" >
                         <div id="${doc.data().id}" class="imgFav d-flex align-items-end" style="background-image: url(${doc.data().posterURL}); " >
                             <div class="movietextbg">
                                 <div class="movietitle-Fav">${doc.data().title}</div>
                             </div>
                         </div>
-                    </div>`
+                    </div> `
                 $("#showmovieFavorite").append(result)
                 countFav++
             }
@@ -527,7 +552,7 @@ function getmovieFavourite() {
         if (countFav < 1) {
             const result =
                 /*html*/
-                `<div class="noFav">No Favorite Movie Now</div>`
+                `<div class="noFav">No Favorite Movie Now</div> `
             $("#noFavortie").append(result)
         }
         $(".imgFav").click(function () {
@@ -542,8 +567,8 @@ function getprofileUser(data) {
     $("#Profile").empty();
     const profile =
         /*html*/
-        `<img src="${data.photoURL}" class="imgprofile" alt="" srcset="">
-        <div class="profileName">${data.displayName}</div>`;
+        `<img src="${data.photoURL}" class="imgprofile">
+            <div class="profileName">${data.displayName}</div>`;
     $("#Profile").append(profile)
 }
 
@@ -589,14 +614,14 @@ function ChangePassword() {
 function editProfile(data) {
     const getUserPhoto =
         /*html*/
-        `<div class="text-center">
+        `<div class="text-center" >
             <img src="${data.photoURL}" class="editImg" alt="" srcset="">
         </div>`
     $("#userPhoto").append(getUserPhoto);
 
     const getUserName =
         /*html*/
-        `<input type="text" class="form-control" id="username" value="${data.displayName}">`
+        `<input type = "text" class="form-control" id="username" value ="${data.displayName}" > `
     $("#userName").append(getUserName);
 
     $("#saveEditProfile").click(function () {

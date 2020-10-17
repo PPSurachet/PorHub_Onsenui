@@ -32,27 +32,23 @@
 </head>
 
 <body class="body">
-    <ons-page>
-        <ons-navigator swipeable id="Navigator" page="Porhub.html"></ons-navigator>
-        <template id="Porhub.html">
-            <ons-page id="PorHub">
-                <ons-toolbar fixed-style>
-                    <div class="center">
-                        P<circle><img src="/assets/image/burger.png" width="25px"></circle>R<span>HUB</span>
-                    </div>
-                </ons-toolbar>
-                <ons-tabbar swipeable position="bottom">
-                    <ons-tab page="views/Home.html" label="Home" icon="md-home" active>
-                    </ons-tab>
-                    <ons-tab page="views/Search.html" label="Search" icon="md-search">
-                    </ons-tab>
-                    <ons-tab page="views/Favourite.html" label="Favourite" icon="md-favorite">
-                    </ons-tab>
-                    <ons-tab page="views/Option.html" label="Option" icon="md-settings">
-                    </ons-tab>
-                </ons-tabbar>
-            </ons-page>
-        </template>
+    <ons-page id="PorHub">
+        <ons-toolbar fixed-style>
+            <div class="center toolbars">
+                P<circle class="circleColor"><img src="/assets/image/burger.png" width="25px"></circle>R<span
+                    class="bgHub">HUB</span>
+            </div>
+        </ons-toolbar>
+        <ons-tabbar swipeable position="bottom">
+            <ons-tab page="views/Home.html" label="Home" icon="md-home" active>
+            </ons-tab>
+            <ons-tab page="views/Search.html" label="Search" icon="md-search">
+            </ons-tab>
+            <ons-tab page="views/Favourite.html" label="Favourite" icon="md-favorite">
+            </ons-tab>
+            <ons-tab page="views/Option.html" label="Option" icon="md-settings">
+            </ons-tab>
+        </ons-tabbar>
     </ons-page>
 </body>
 

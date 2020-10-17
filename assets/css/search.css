@@ -75,6 +75,26 @@
     border: 4px solid #000;
 }
 
+.btn-category{
+    border: 3px solid #ff0015;
+}
+
+.btn-category:hover{
+    border: 3px solid #ff0015;
+    background-color: #ff0015;
+    color: white;
+}
+
+.btn-category-darkmode{
+    border: 3px solid #1E73F1;
+}
+
+.btn-category-darkmode:hover{
+    border: 3px solid #1E73F1;
+    background-color: #1E73F1;
+    color: white;
+}
+
 
 .imgSrc-darkmode{
     border: 0;
