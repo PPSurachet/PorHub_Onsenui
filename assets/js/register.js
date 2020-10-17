@@ -1,12 +1,6 @@
 $(function () {
     var db = firebase.firestore();
 
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-            window.location.href = "PorHub.html"
-        }
-    });
-
     var imgtarget;
 
     db.collection("profilepic").get().then(function (querySnapshot) {
@@ -44,15 +38,13 @@ $(function () {
             // ...
             ons.notification.alert(errorMessage);
         });
-
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
-                var userupdate = firebase.auth().currentUser;
-                userupdate.updateProfile({
+                var userUpdate = firebase.auth().currentUser;
+                userUpdate.updateProfile({
                     displayName: name,
                     photoURL: imgtarget
                 }).then(function () {
-                    // Update successful.
                     window.location.href = "PorHub.html"
                 }).catch(function (error) {
                     // An error happened.

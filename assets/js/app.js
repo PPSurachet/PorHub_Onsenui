@@ -154,10 +154,9 @@ function getmovieDetail(Target) {
             $("#showVideo").empty();
             const videoURL =
                 /*html*/
-                `<video id="my-video" class="video-js" controls preload="auto" autoplay preload="auto"
-                data-setup="{}">
-                <source src="${doc.data().videoURL}" type="video/mp4" />
-            </video>`
+                `<video id="my-video" class="video-js" controls preload="auto" autoplay data-setup="{}">
+                    <source src="${doc.data().videoURL}" type="video/mp4" />
+                </video>`
             $("#showVideo").append(videoURL)
 
             var docElm = document.getElementById('my-video')
