@@ -105,7 +105,7 @@ function getmovie() {
         $(".area-imgMovie ons-carousel-item").click(function () {
             const movieTarget = $(this).attr('id');
             getmovieDetail(movieTarget);
-            document.querySelector("#Navigator").pushPage("views/movieDetail.html");
+            document.querySelector("#Navigator_home").pushPage("views/movieDetail.html");
         });
     });
 }
@@ -198,6 +198,251 @@ function getmovieDetail(Target) {
     });
 }
 
+function addmovieFavorite(data) {
+    $("#btnFavorite button").click(function () {
+        var user = firebase.auth().currentUser;
+        if (this.id == "addFavorite") {
+            $(this).html("Remove Favorite")
+            $(this).attr("id", "RemoveFavorite")
+            db.collection("movies").doc(data.id).update({
+                uid: firebase.firestore.FieldValue.arrayUnion(user.uid)
+            }).then(function () {
+                getmovieFavourite();
+            });
+        } else if (this.id == "RemoveFavorite") {
+            $(this).html("Add Favorite")
+            $(this).attr("id", "addFavorite")
+            db.collection("movies").doc(data.id).update({
+                uid: firebase.firestore.FieldValue.arrayRemove(user.uid)
+            }).then(function () {
+                getmovieFavourite();
+            });
+        }
+    })
+}
+
+function getmovieDetailSrc(Target) {
+    $("#showMovieDetailSrc").empty();
+    db.collection("movies").doc(Target).get().then(function (doc) {
+        const result =
+            /*html*/
+            `<div class="area-imgDetail">
+                <img src="${doc.data().posterURL}" class="imgDetail" alt="" srcset="">
+            </div>
+            <ons-row class="area-categoryDetail Prompt" id="CategoryMovieSrc"></ons-row>
+            <div class="bg-buttonDetail text-center">
+                <div class="area-btn" id="btnFavoriteSrc">
+
+                </div>
+                <div class="area-btn">
+                    <button type="button" id="btnTrailerSrc" class="trailer-btn btn-lg btn-block">Watch Trailer</button>
+                    <div id="showTrailerSrc"></div>
+                </div>
+                <div class="area-btn">
+                    <button type="button" id="btnPlaySrc" class="play-btn btn-lg btn-block">PLAY</button>
+                    <div id="showVideoSrc"></div>
+                </div>
+                <div class="title-text Prompt">
+                    ${doc.data().title} ${doc.data().year}
+                </div>
+                <div class="review-text Prompt">
+                    ${doc.data().review}
+                </div>
+            </div>`
+        $("#showMovieDetailSrc").append(result)
+
+        const TrailerMovie =
+            /*html*/
+            `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${doc.data().trailerURL}" allowfullscreen></iframe>`
+        $("#showTrailerSrc").append(TrailerMovie)
+        $("#showTrailerSrc").hide();
+
+        $("#btnTrailerSrc").click(function () {
+            $("#showTrailerSrc").toggle();
+        })
+
+        $("#btnPlaySrc").click(function () {
+            $("#showVideoSrc").empty();
+            const videoURL =
+                /*html*/
+                `<video id="my-video" class="video-js" controls preload="auto" autoplay data-setup="{}">
+                    <source src="${doc.data().videoURL}" type="video/mp4" />
+                </video>`
+            $("#showVideoSrc").append(videoURL)
+
+            var docElm = document.getElementById('my-video')
+            // $("#my-video").requestFullscreen();
+            docElm.requestFullscreen();
+        })
+
+        const getCategory = doc.data().category;
+        for (var i = 0; i < getCategory.length; i++) {
+            const Category =
+                /*html*/
+                `<div class="categoryDetail">${getCategory[i]}</div>`
+            $("#CategoryMovieSrc").append(Category)
+        }
+
+        const ratingResult =
+            /*html*/
+            `<div class="rating-text Prompt">
+                <ons-icon size="24px" icon="md-star"></ons-icon> ${doc.data().rating}
+            </div>`
+        $("#CategoryMovieSrc").append(ratingResult)
+
+        var user = firebase.auth().currentUser;
+        if (doc.data().uid.indexOf(user.uid) != -1) {
+            const RevFavor =
+                /*html*/
+                `<button type="button" class="favorite-btn btn-lg btn-block" id="RemoveFavorite">Remove Favourite</button>`
+            $("#btnFavoriteSrc").append(RevFavor)
+        } else {
+            const addFavor =
+                /*html*/
+                `<button type="button" class="favorite-btn btn-lg btn-block" id="addFavorite">Add Favourite</button>`
+            $("#btnFavoriteSrc").append(addFavor)
+        }
+        addmovieFavoriteSrc(doc.data())
+
+    }).catch(function (error) {
+        console.log("Error getting cached document:", error);
+    });
+}
+
+function addmovieFavoriteSrc(data) {
+    $("#btnFavoriteSrc button").click(function () {
+        var user = firebase.auth().currentUser;
+        if (this.id == "addFavorite") {
+            $(this).html("Remove Favorite")
+            $(this).attr("id", "RemoveFavorite")
+            db.collection("movies").doc(data.id).update({
+                uid: firebase.firestore.FieldValue.arrayUnion(user.uid)
+            }).then(function () {
+                getmovieFavourite();
+            });
+        } else if (this.id == "RemoveFavorite") {
+            $(this).html("Add Favorite")
+            $(this).attr("id", "addFavorite")
+            db.collection("movies").doc(data.id).update({
+                uid: firebase.firestore.FieldValue.arrayRemove(user.uid)
+            }).then(function () {
+                getmovieFavourite();
+            });
+        }
+    })
+}
+
+function getmovieDetailFav(Target) {
+    $("#showMovieDetailFav").empty();
+    db.collection("movies").doc(Target).get().then(function (doc) {
+        const result =
+            /*html*/
+            `<div class="area-imgDetail">
+                <img src="${doc.data().posterURL}" class="imgDetail" alt="" srcset="">
+            </div>
+            <ons-row class="area-categoryDetail Prompt" id="CategoryMovieFav"></ons-row>
+            <div class="bg-buttonDetail text-center">
+                <div class="area-btn" id="btnFavoriteFav">
+
+                </div>
+                <div class="area-btn">
+                    <button type="button" id="btnTrailerFav" class="trailer-btn btn-lg btn-block">Watch Trailer</button>
+                    <div id="showTrailerFav"></div>
+                </div>
+                <div class="area-btn">
+                    <button type="button" id="btnPlayFav" class="play-btn btn-lg btn-block">PLAY</button>
+                    <div id="showVideoFav"></div>
+                </div>
+                <div class="title-text Prompt">
+                    ${doc.data().title} ${doc.data().year}
+                </div>
+                <div class="review-text Prompt">
+                    ${doc.data().review}
+                </div>
+            </div>`
+        $("#showMovieDetailFav").append(result)
+
+        const TrailerMovie =
+            /*html*/
+            `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${doc.data().trailerURL}" allowfullscreen></iframe>`
+        $("#showTrailerFav").append(TrailerMovie)
+        $("#showTrailerFav").hide();
+
+        $("#btnTrailerFav").click(function () {
+            $("#showTrailerFav").toggle();
+        })
+
+        $("#btnPlayFav").click(function () {
+            $("#showVideoFav").empty();
+            const videoURL =
+                /*html*/
+                `<video id="my-video" class="video-js" controls preload="auto" autoplay data-setup="{}">
+                    <source src="${doc.data().videoURL}" type="video/mp4" />
+                </video>`
+            $("#showVideoFav").append(videoURL)
+
+            var docElm = document.getElementById('my-video')
+            // $("#my-video").requestFullscreen();
+            docElm.requestFullscreen();
+        })
+
+        const getCategory = doc.data().category;
+        for (var i = 0; i < getCategory.length; i++) {
+            const Category =
+                /*html*/
+                `<div class="categoryDetail">${getCategory[i]}</div>`
+            $("#CategoryMovieFav").append(Category)
+        }
+
+        const ratingResult =
+            /*html*/
+            `<div class="rating-text Prompt">
+                <ons-icon size="24px" icon="md-star"></ons-icon> ${doc.data().rating}
+            </div>`
+        $("#CategoryMovieFav").append(ratingResult)
+
+        var user = firebase.auth().currentUser;
+        if (doc.data().uid.indexOf(user.uid) != -1) {
+            const RevFavor =
+                /*html*/
+                `<button type="button" class="favorite-btn btn-lg btn-block" id="RemoveFavorite">Remove Favourite</button>`
+            $("#btnFavoriteFav").append(RevFavor)
+        } else {
+            const addFavor =
+                /*html*/
+                `<button type="button" class="favorite-btn btn-lg btn-block" id="addFavorite">Add Favourite</button>`
+            $("#btnFavoriteFav").append(addFavor)
+        }
+        addmovieFavoriteSrc(doc.data())
+
+    }).catch(function (error) {
+        console.log("Error getting cached document:", error);
+    });
+}
+
+function addmovieFavoriteFav(data) {
+    $("#btnFavoriteFav button").click(function () {
+        var user = firebase.auth().currentUser;
+        if (this.id == "addFavorite") {
+            $(this).html("Remove Favorite")
+            $(this).attr("id", "RemoveFavorite")
+            db.collection("movies").doc(data.id).update({
+                uid: firebase.firestore.FieldValue.arrayUnion(user.uid)
+            }).then(function () {
+                getmovieFavourite();
+            });
+        } else if (this.id == "RemoveFavorite") {
+            $(this).html("Add Favorite")
+            $(this).attr("id", "addFavorite")
+            db.collection("movies").doc(data.id).update({
+                uid: firebase.firestore.FieldValue.arrayRemove(user.uid)
+            }).then(function () {
+                getmovieFavourite();
+            });
+        }
+    })
+}
+
 function getmoviefromSearch() {
     const searchText = $("#searchResult").val()
     const newsearchText = searchText.replace(/ /g, "");
@@ -221,8 +466,8 @@ function getmoviefromSearch() {
         });
         $(".imgSrc").click(function () {
             const movieTarget = $(this).attr('id');
-            getmovieDetail(movieTarget);
-            document.querySelector("#Navigator").pushPage("views/movieDetail.html");
+            getmovieDetailSrc(movieTarget)
+            document.querySelector("#Navigator_search").pushPage("views/movieDetailSrc.html");
         });
     });
 }
@@ -250,33 +495,10 @@ function getmovieCategory() {
             });
             $(".imgSrc").click(function () {
                 const movieTarget = $(this).attr('id');
-                getmovieDetail(movieTarget);
-                document.querySelector("#Navigator").pushPage("views/movieDetail.html");
+                getmovieDetailSrc(movieTarget)
+                document.querySelector("#Navigator_search").pushPage("views/movieDetailSrc.html");
             });
         });
-    })
-}
-
-function addmovieFavorite(data) {
-    $("#btnFavorite button").click(function () {
-        var user = firebase.auth().currentUser;
-        if (this.id == "addFavorite") {
-            $(this).html("Remove Favorite")
-            $(this).attr("id", "RemoveFavorite")
-            db.collection("movies").doc(data.id).update({
-                uid: firebase.firestore.FieldValue.arrayUnion(user.uid)
-            }).then(function () {
-                getmovieFavourite();
-            });
-        } else if (this.id == "RemoveFavorite") {
-            $(this).html("Add Favorite")
-            $(this).attr("id", "addFavorite")
-            db.collection("movies").doc(data.id).update({
-                uid: firebase.firestore.FieldValue.arrayRemove(user.uid)
-            }).then(function () {
-                getmovieFavourite();
-            });
-        }
     })
 }
 
@@ -310,8 +532,8 @@ function getmovieFavourite() {
         }
         $(".imgFav").click(function () {
             const movieTarget = $(this).attr('id');
-            getmovieDetail(movieTarget);
-            document.querySelector("#Navigator").pushPage("views/movieDetail.html");
+            getmovieDetailFav(movieTarget);
+            document.querySelector("#Navigator_favorite").pushPage("views/movieDetailFav.html");
         })
     });
 }
@@ -400,3 +622,6 @@ function Logout() {
         });
     })
 }
+
+
+

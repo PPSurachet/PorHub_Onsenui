@@ -10,12 +10,16 @@ $(function () {
                 $('.Profile').toggleClass('Profile-darkmode')
                 $('.searchbar').toggleClass('searchbar-darkmode')
                 $('.titleMovie').toggleClass('titleMovie-darkmode')
+                $('.imgSrc').toggleClass('imgSrc-darkmode')
             });
-        } else if (page.id == "editProfile" || page.id == "changePass" || page.id == "movieDetail") {
+        } else if (page.id == "editProfile" || page.id == "changePass" || page.id == "movieDetail" || page.id == "movieDetailSrc" || page.id == "movieDetailFav") {
             if (document.querySelector("#my-switch").checked) {
+                $('#PorHub .page__background').css("background-color", "#2F2F2F");
                 $('#changePass .page__background').css("background-color", "#2F2F2F");
                 $('#editProfile .page__background').css("background-color", "#2F2F2F");
                 $('#movieDetail .page__background').css("background-color", "#2F2F2F");
+                $('#movieDetailSrc .page__background').css("background-color", "#2F2F2F");
+                $('#movieDetailFav .page__background').css("background-color", "#2F2F2F");
                 $('.titleOP', 'body').css("color", "white");
                 $('svg').css("fill", "white");
                 $('.btn-lightmode').css("background-color", "#FA043F");
