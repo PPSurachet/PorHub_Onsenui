@@ -165,3 +165,7 @@ ons-list-item{
     margin-left: 4rem;
     font-size: 23px;
 }
+
+.backColor{
+    color: rgb(0, 0, 0);
+}

@@ -101,6 +101,7 @@ ons-toolbar .center img{
     font-size: 25px;
     margin-left: 1rem;
 }
+
 svg{
     margin-right: 1rem;
     margin-left: 1rem;
@@ -112,7 +113,7 @@ svg{
 .svg-darkmode{
     margin-right: 1rem;
     margin-left: 1rem;
-    fill: white;
+    fill: black;
     width: 20px;
     height: 45px;
 }
@@ -159,4 +160,8 @@ svg{
     border-radius: 10px;
     font-weight: bold;
     border: 2.5px solid black;
+}
+
+.ons-icon{
+    line-height: 0;
 }

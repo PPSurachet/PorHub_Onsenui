@@ -13,18 +13,19 @@ $(function () {
             getmovieFavourite();
         } else if (page.id === "Option") {
             Logout();
-            document.querySelector("#ChangePassword").onclick = function () {
-                document.querySelector('#Navigator_option').pushPage("views/ChangePassword.html")
-            }
-            document.querySelector("#editProfile").onclick = function () {
-                document.querySelector('#Navigator_option').pushPage("views/editProfile.html")
-            }
+            OptionPush();
         } else if (page.id === "changePass") {
             showPassword();
             ChangePassword();
+            document.querySelector("#btn-back-option").onclick = function () {
+                document.querySelector('#Navigator_option').popPage();
+            }
         } else if (page.id === "editProfile") {
             var user = firebase.auth().currentUser;
             editProfile(user)
+            document.querySelector("#btn-back-option").onclick = function () {
+                document.querySelector('#Navigator_option').popPage();
+            }
         }
     });
 
@@ -129,14 +130,14 @@ function getmovieDetail(Target) {
             /*html*/
             `<div class="img-backgound-detail" style="background-image: url(${doc.data().posterURL});">
                 <div class="area-margin d-flex justify-content-between">
-                    <ons-back-button class="back-button"></ons-back-button>
+                    <ons-back-button></ons-back-button>
                 </div>
                 <div class="area-imgDetail">
                     <img src="${doc.data().posterURL}" class="imgDetail" alt="" srcset="">
                 </div>
             </div>
             <div class="bg-buttonDetail text-center">
-            <ons-row class="area-categoryDetail Prompt" id="CategoryMovie"></ons-row>
+                <ons-row class="area-categoryDetail Prompt" id="CategoryMovie"></ons-row>
                 <div class="area-btn" id="btnFavorite">
                 </div>
                 <div class="area-btn">
@@ -531,6 +532,7 @@ function getmovieFavourite() {
     $("#noFavortie").empty();
     $("#showmovieFavorite").empty();
     var countFav = 0;
+
     db.collection("movies").get().then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
             var user = firebase.auth().currentUser;
@@ -638,6 +640,15 @@ function editProfile(data) {
     })
 }
 
+function OptionPush() {
+    document.querySelector("#ChangePassword").onclick = function () {
+        document.querySelector('#Navigator_option').pushPage("views/ChangePassword.html")
+    }
+    document.querySelector("#editProfile").onclick = function () {
+        document.querySelector('#Navigator_option').pushPage("views/editProfile.html")
+    }
+}
+
 function Logout() {
     $("#Logout").click(function () {
         firebase.auth().signOut().then(function () {
@@ -647,6 +658,3 @@ function Logout() {
         });
     })
 }
-
-
-

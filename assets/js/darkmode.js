@@ -25,9 +25,11 @@ $(function () {
                 $('#movieDetailFav .page__background').css("background-color", "#2F2F2F");
                 $('.titleOP', 'body').css("color", "white");
                 $('svg').css("fill", "white");
+                $('.svg-option').css("fill", "white")
                 $('.btn-lightmode').css("background-color", "#FA043F");
                 $('.btn-editProfile').css("background-color", "#FA043F");
                 $('.title-username , .icon-pencil').css("color", "white");
+                $('.backColor').css("color", "white")
             }
         }
 
